@@ -1,0 +1,53 @@
+package PDM;
+import java.awt.Button;
+import java.awt.Dialog;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+public class unusallocation {
+    private static Dialog dialog;
+ 
+    public unusallocation() {
+    	int locationa=5;
+    	int locationb=3;
+    	if (locationa!=locationb)
+    	{
+        Frame frame = new Frame();
+        dialog = new Dialog(frame, "Login Warning", true);
+        dialog.setLayout(new FlowLayout());
+        Button button = new Button("Yes");
+        
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	int click = JOptionPane.showConfirmDialog(null,"You have just login in different location");
+				if(click== JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(null,"Login Confirmation");
+				}
+				if(click== JOptionPane.CANCEL_OPTION) {
+					JOptionPane.showMessageDialog(null,"Cancel");
+	                unusallocation.dialog.setVisible(false);
+				}
+				if(click== JOptionPane.NO_OPTION) {
+					JOptionPane.showMessageDialog(null,"No");
+	                unusallocation.dialog.setVisible(false);
+				}
+				if(click== JOptionPane.CLOSED_OPTION) {
+					JOptionPane.showMessageDialog(null,"Close The Warning?");
+	                unusallocation.dialog.setVisible(false);
+				}}
+        });
+        dialog.add(new Label("Click for more information."));
+        dialog.add(button);
+        dialog.setSize(300, 300);
+        dialog.setVisible(true);
+    }
+    }
+ 
+    public static void main(String args[]) {
+        new unusallocation();
+    }
+}
