@@ -1,0 +1,53 @@
+package PDM;
+import java.awt.Button;
+import java.awt.Dialog;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+public class unusalspend {
+    private static Dialog dialog;
+ 
+    public unusalspend() {
+    	int total=500;
+    	int spend=200;
+    	if (spend>=0.25*total)
+    	{
+        Frame frame = new Frame();
+        dialog = new Dialog(frame, "Unusual Action Warning", true);
+        dialog.setLayout(new FlowLayout());
+        Button button = new Button("Yes");    
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	int click = JOptionPane.showConfirmDialog(null,"There's unusual action in your account. Do you want to continute");
+				if(click== JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(null,"Login Confirmation");
+				}
+				if(click== JOptionPane.CANCEL_OPTION) {
+					JOptionPane.showMessageDialog(null,"Cancel");
+	                unusalspend.dialog.setVisible(false);
+				}
+				if(click== JOptionPane.NO_OPTION) {
+					JOptionPane.showMessageDialog(null,"No");
+	                unusalspend.dialog.setVisible(false);
+				}
+				if(click== JOptionPane.CLOSED_OPTION) {
+					JOptionPane.showMessageDialog(null,"Close The Warning?");
+	                unusalspend.dialog.setVisible(false);
+				}
+            }
+        });
+        dialog.add(new Label("Click for more information."));
+        dialog.add(button);
+        dialog.setSize(300, 300);
+        dialog.setVisible(true);
+    }
+    }
+ 
+    public static void main(String args[]) {
+        new unusalspend();
+    }
+}
