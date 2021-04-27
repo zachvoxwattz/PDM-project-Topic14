@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.io.File;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
@@ -33,11 +35,14 @@ public class LoginWindow extends JFrame {
 	
 	private JTextField Usernametxt;
 	private JPasswordField pass;
+	
+	
+	
 
 	
-	JButton signin = new JButton("Sign in",new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\icons8-add-user-male-16.png"));
+	JButton signin = new JButton("Sign in",new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\UI\\icons8-add-user-male-16.png"));
 	JButton login = new JButton("Login",new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\if_login_173049.png"));
-    ImageIcon im=new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\mainmenu.jpeg");
+    ImageIcon im=new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\UI\\mainmenu.jpeg");
 	public static void main(String[] args) {
 		new LoginWindow();
 		EventQueue.invokeLater(new Runnable() {

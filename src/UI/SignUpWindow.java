@@ -219,7 +219,7 @@ public class SignUpWindow    {
 				}	
 		});
 		backBt.setFont(new Font("Tahoma", Font.BOLD, 13));
-		backBt.setBounds(251, 562, 91, 34);
+		backBt.setBounds(252, 562, 91, 34);
 		frame.getContentPane().add(backBt);
 		comfirmLable.setBackground(Color.WHITE);
 		comfirmLable.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
@@ -233,8 +233,8 @@ public class SignUpWindow    {
 		isvalid.setBounds(626, 232, 59, 29);
 		frame.getContentPane().add(isvalid);
 		
-		JLabel lblNewLabel_8 = new JLabel("New label");
-		lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\multiplebackground-1 (1).jpg"));
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\multiplebackground-1 (1).jpg"));
 		lblNewLabel_8.setBounds(0, 0, 884, 734);
 		frame.getContentPane().add(lblNewLabel_8);}
 		
