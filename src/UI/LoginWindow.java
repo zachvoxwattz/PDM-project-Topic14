@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -35,14 +37,14 @@ public class LoginWindow extends JFrame {
 	
 	private JTextField Usernametxt;
 	private JPasswordField pass;
+	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-add-user-male-16.png")).getImage();
+	Image img2 =new ImageIcon(this.getClass().getResource("/if_login_173049.png")).getImage();
+	Image img3 =new ImageIcon(this.getClass().getResource("/mainmenu.jpeg")).getImage();
 	
 	
-	
-
-	
-	JButton signin = new JButton("Sign in",new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\UI\\icons8-add-user-male-16.png"));
-	JButton login = new JButton("Login",new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\if_login_173049.png"));
-    ImageIcon im=new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\UI\\mainmenu.jpeg");
+	JButton signin = new JButton("Sign in",new ImageIcon(img1));
+	JButton login = new JButton("Login",new ImageIcon(img2));
+    ImageIcon im=new ImageIcon(img3);
 	public static void main(String[] args) {
 		new LoginWindow();
 		EventQueue.invokeLater(new Runnable() {
