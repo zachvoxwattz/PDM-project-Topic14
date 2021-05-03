@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -30,8 +30,9 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-@SuppressWarnings("serial")
-public class LoginWindow extends JFrame {
+public class LoginWindow extends JFrame 
+{
+	private static final long serialVersionUID = -3821183003050026681L;
 
 	private JPanel contentPane;
 	
@@ -45,20 +46,7 @@ public class LoginWindow extends JFrame {
 	JButton signin = new JButton("Sign in",new ImageIcon(img1));
 	JButton login = new JButton("Login",new ImageIcon(img2));
     ImageIcon im=new ImageIcon(img3);
-	public static void main(String[] args) {
-		new LoginWindow();
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-			
-				try {
-					LoginWindow frame = new LoginWindow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	public LoginWindow() {
 		this.addWindowListener(new WindowAdapter() {
 		});
@@ -138,11 +126,11 @@ public class LoginWindow extends JFrame {
 		lblNewLabel_2.setBounds(0, 0, 350, 350);
 		panel_1.add(lblNewLabel_2);
 	}
-	public boolean isFill() {
-		String passw=  new String(pass.getPassword());
-		if(Usernametxt.getText().isEmpty() || passw.isEmpty()) {
-			return false;
-		}
-		return true;
+	
+	public boolean isFill() 
+	{
+		String passw =  new String(pass.getPassword());
+		if (Usernametxt.getText().isEmpty() || passw.isEmpty()) return false;
+		else return true;
 	}
 }
