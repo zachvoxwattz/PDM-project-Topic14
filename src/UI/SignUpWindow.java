@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -52,9 +54,17 @@ public class SignUpWindow    {
 	JLabel lblNewLabel_6 = new JLabel("Address");
 	JLabel comfirmLable = new JLabel("");
 	JLabel isvalid = new JLabel("");
+	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-ok-16.png")).getImage();
+	Image img2 =new ImageIcon(this.getClass().getResource("/back.png")).getImage();
+	Image img3 =new ImageIcon(this.getClass().getResource("/multiplebackground-1 (1).jpg")).getImage();
 	
-	JButton btnNewButton_1 = new JButton("Create",new ImageIcon("D:\\Code\\BankingOOP\\BankingProject\\src\\icons8-ok-16.png"));
-	JButton backBt = new JButton("Back",new ImageIcon("D:\\Code\\BankingOOP\\BankingProject\\src\\back.png"));
+	ImageIcon imgi1 = new ImageIcon(img3);
+	
+	
+	
+	
+	JButton btnNewButton_1 = new JButton("Create",new ImageIcon(img1));
+	JButton backBt = new JButton("Back",new ImageIcon(img2));
 	
 
 	
@@ -219,7 +229,7 @@ public class SignUpWindow    {
 				}	
 		});
 		backBt.setFont(new Font("Tahoma", Font.BOLD, 13));
-		backBt.setBounds(252, 562, 91, 34);
+		backBt.setBounds(252, 562, 103, 34);
 		frame.getContentPane().add(backBt);
 		comfirmLable.setBackground(Color.WHITE);
 		comfirmLable.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
@@ -234,7 +244,7 @@ public class SignUpWindow    {
 		frame.getContentPane().add(isvalid);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
-		lblNewLabel_8.setIcon(new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\multiplebackground-1 (1).jpg"));
+		lblNewLabel_8.setIcon(imgi1);
 		lblNewLabel_8.setBounds(0, 0, 884, 734);
 		frame.getContentPane().add(lblNewLabel_8);}
 		

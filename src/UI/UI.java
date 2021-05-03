@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
@@ -19,11 +20,24 @@ import java.awt.event.MouseEvent;
 public class UI extends JFrame {
 
 	private JPanel contentPane;
-	JButton TransferMoney = new JButton("Transfer Money");
 	JButton ViewInf = new JButton("View Information");
-	JButton HisTrans = new JButton("History Transaction");
-	JButton PayBill = new JButton("Pay Bill");
+	JButton TransferMoney = new JButton("Transfer Money");	
+	JButton PayBill = new JButton("Bill Payment");
+	JButton HisTrans = new JButton("History Transaction");	
 	JButton Exitbn = new JButton("Log out");
+	
+	
+	Image img1 =new ImageIcon(this.getClass().getResource("/man-user.png")).getImage();
+	Image img2 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
+	Image img3 =new ImageIcon(this.getClass().getResource("/paybill.png")).getImage();
+	Image img4 =new ImageIcon(this.getClass().getResource("/clock.png")).getImage();
+	Image img5 =new ImageIcon(this.getClass().getResource("/logout.png")).getImage();
+	
+	
+	
+	
+	
+	
 	private final JPanel panel_1 = new JPanel();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,6 +64,7 @@ public class UI extends JFrame {
 		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		ViewInf.setIcon(new ImageIcon(img1));
 		ViewInf.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -83,7 +98,7 @@ public class UI extends JFrame {
 			}
 		});
 		
-		
+		HisTrans.setIcon(new ImageIcon(img4));
 		HisTrans.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -95,7 +110,7 @@ public class UI extends JFrame {
 		HisTrans.setBounds(47, 336, 176, 43);
 		contentPane.add(HisTrans);
 		
-		
+		TransferMoney.setIcon(new ImageIcon(img2));
 		TransferMoney.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -117,7 +132,7 @@ public class UI extends JFrame {
 		TransferMoney.setBounds(733, 249, 162, 43);
 		contentPane.add(TransferMoney);
 		
-		
+		PayBill.setIcon(new ImageIcon(img3));
 		PayBill.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -138,7 +153,7 @@ public class UI extends JFrame {
 		});
 		PayBill.setBounds(733, 336, 162, 43);
 		contentPane.add(PayBill);
-		
+		Exitbn.setIcon(new ImageIcon(img5));
 		Exitbn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -168,10 +183,11 @@ public class UI extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setBackground(new Color(0, 206, 209));
+		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setBounds(0, 0, 957, 553);
 		panel.add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\src\\UI\\background.png"));
+		Image img =new ImageIcon(this.getClass().getResource("/background.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
 		panel_1.setBackground(new Color(0, 255, 255));
 		panel_1.setBounds(0, 0, 957, 162);
 		

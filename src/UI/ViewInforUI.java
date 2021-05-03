@@ -44,7 +44,7 @@ public class ViewInforUI extends JFrame {
 		UserInfor.setOpaque(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 240, 245));
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 84, 980, 488);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -110,6 +110,10 @@ public class ViewInforUI extends JFrame {
 				panel.add(Back);
 				
 				JButton ChangePinbn = new JButton("Change Pin");
+				ChangePinbn.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				ChangePinbn.setBounds(633, 421, 87, 42);
 				panel.add(ChangePinbn);
 				
