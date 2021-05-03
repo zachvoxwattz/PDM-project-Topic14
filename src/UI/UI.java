@@ -24,7 +24,7 @@ public class UI extends JFrame {
 	JButton TransferMoney = new JButton("Transfer Money");	
 	JButton PayBill = new JButton("Bill Payment");
 	JButton HisTrans = new JButton("History Transaction");	
-	JButton Exitbn = new JButton("Log out");
+	JButton Exitbn = new JButton("    Log out");
 	
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/man-user.png")).getImage();
