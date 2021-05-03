@@ -16,6 +16,7 @@ public class AppWindowUI extends JFrame
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setTitle("PDM Project");
 			setLayout(new BorderLayout());
+			setResizable(false);
 		
 		app = new App();
 			add(app);
