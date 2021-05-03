@@ -30,6 +30,8 @@ public class PayBillUI extends JFrame {
 	 */
 	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-search-16.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/ElectricityBill.png")).getImage();
+	Image img3 =new ImageIcon(this.getClass().getResource("/icons8-ok-16.png")).getImage();
+	Image img4 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 	ImageIcon imageIcon =new ImageIcon(img2);
  	private JTextField cusID;
 	public PayBillUI() {
@@ -52,16 +54,8 @@ public class PayBillUI extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"--", "Water", "Internet", "Television", "Electricity"}));
-		comboBox.setBounds(373, 108, 166, 21);
+		comboBox.setBounds(366, 108, 166, 21);
 		panel.add(comboBox);
-		
-		JButton btnNewButton = new JButton("",new ImageIcon(img1));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(641, 108, 85, 21);
-		panel.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("Pay for ");
 		lblNewLabel_1.setBounds(232, 108, 91, 21);
@@ -77,7 +71,7 @@ public class PayBillUI extends JFrame {
 		panel_1.add(lblNewLabel_2);
 		
 		cusID = new JTextField();
-		cusID.setBounds(413, 43, 170, 22);
+		cusID.setBounds(368, 45, 170, 22);
 		panel_1.add(cusID);
 		cusID.setColumns(10);
 		
@@ -87,17 +81,25 @@ public class PayBillUI extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(imageIcon);
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Duy\\eclipse-workspace\\ProjectPDM\\Images\\ElectricityBill.png"));
+		
 		lblNewLabel_4.setBackground(Color.GRAY);
 		lblNewLabel_4.setBounds(368, 107, 433, 231);
 		panel_1.add(lblNewLabel_4);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(641, 419, 85, 21);
+		JButton btnNewButton_1 = new JButton("Comfirm", new ImageIcon(img3));
+		btnNewButton_1.setBounds(567, 419, 102, 31);
 		panel_1.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(792, 419, 85, 21);
+		JButton btnNewButton_2 = new JButton("Back",new ImageIcon((img4)));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				UI ui =new UI();
+				ui.setVisible(true);
+				
+			}
+		});
+		btnNewButton_2.setBounds(722, 419, 85, 31);
 		panel_1.add(btnNewButton_2);
 	}
 }

@@ -167,14 +167,14 @@ public class SignUpWindow    {
 		frame.getContentPane().add(lblNewLabel_5);
 		
 	
-		dayBox.setBounds(251, 180, 41, 21);
+		dayBox.setBounds(251, 180, 51, 21);
 		frame.getContentPane().add(dayBox);
 		
 		
-		monthBox.setBounds(325, 180, 51, 20);
+		monthBox.setBounds(339, 180, 51, 20);
 		frame.getContentPane().add(monthBox);
 		
-		yearBox.setBounds(422, 180, 73, 20);
+		yearBox.setBounds(438, 180, 73, 20);
 		frame.getContentPane().add(yearBox);
 		BirthDay.setBackground(Color.WHITE);
 		BirthDay.setForeground(Color.BLACK);
@@ -229,7 +229,7 @@ public class SignUpWindow    {
 				}	
 		});
 		backBt.setFont(new Font("Tahoma", Font.BOLD, 13));
-		backBt.setBounds(252, 562, 103, 34);
+		backBt.setBounds(252, 562, 124, 34);
 		frame.getContentPane().add(backBt);
 		comfirmLable.setBackground(Color.WHITE);
 		comfirmLable.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));

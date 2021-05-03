@@ -14,6 +14,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HistoryUI extends JFrame {
 
@@ -30,7 +33,7 @@ public class HistoryUI extends JFrame {
 	 */
 	public HistoryUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 936, 564);
+		setBounds(100, 100, 936, 713);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,7 +59,7 @@ public class HistoryUI extends JFrame {
 		panel.add(comboBox);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 124, 912, 393);
+		scrollPane.setBounds(10, 136, 912, 393);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -71,5 +74,21 @@ public class HistoryUI extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 525, 922, 141);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				UI ui = new UI();
+				ui.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(799, 55, 85, 33);
+		panel_1.add(btnNewButton);
 	}
 }

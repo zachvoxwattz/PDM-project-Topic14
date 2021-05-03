@@ -10,16 +10,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.MatteBorder;
 
 public class ViewInforUI extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel UserName;
-
+	
+	Image img1 =new ImageIcon(this.getClass().getResource("/changePin.png")).getImage();
+	Image img2 =new ImageIcon(this.getClass().getResource("/back.png")).getImage();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,13 +46,14 @@ public class ViewInforUI extends JFrame {
 		UserInfor.setFont(new Font("Tahoma", Font.BOLD, 18));
 		UserInfor.setBackground(new Color(211, 211, 211));
 		UserInfor.setForeground(new Color(0, 0, 139));
-		UserInfor.setBounds(0, 0, 980, 80);
+		UserInfor.setBounds(0, 0, 980, 86);
 		contentPane.add(UserInfor);
 		UserInfor.setOpaque(true);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(UIManager.getBorder("InternalFrame.border"));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 84, 980, 488);
+		panel.setBounds(0, 84, 980, 498);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -98,7 +106,7 @@ public class ViewInforUI extends JFrame {
 				Email.setBounds(541, 352, 88, 30);
 				panel.add(Email);
 				
-				JButton Back = new JButton("Back");
+				JButton Back = new JButton("Back", new ImageIcon(img2));
 				Back.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -106,20 +114,20 @@ public class ViewInforUI extends JFrame {
 						ui.setVisible(true);
 					}
 				});
-				Back.setBounds(798, 421, 87, 42);
+				Back.setBounds(783, 421, 102, 42);
 				panel.add(Back);
 				
-				JButton ChangePinbn = new JButton("Change Pin");
+				JButton ChangePinbn = new JButton("Change Pin", new ImageIcon(img1));
 				ChangePinbn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
-				ChangePinbn.setBounds(633, 421, 87, 42);
+				ChangePinbn.setBounds(603, 421, 126, 42);
 				panel.add(ChangePinbn);
 				
 				JLabel accNum = new JLabel("Account Number");
 				accNum.setHorizontalAlignment(SwingConstants.LEFT);
-				accNum.setBounds(217, 46, 102, 21);
+				accNum.setBounds(215, 44, 102, 21);
 				panel.add(accNum);
 				
 				JLabel lblNewLabel_7 = new JLabel("New label");
