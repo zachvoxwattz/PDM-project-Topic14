@@ -16,6 +16,9 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
+
+import backend_functions.SQLQueryEngine;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,12 +29,14 @@ public class TranferMoneyUI extends JFrame
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private SQLQueryEngine sql;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 
-	public TranferMoneyUI()
+	public TranferMoneyUI(SQLQueryEngine sqle)
 	{
+		this.sql = sqle;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1006, 535);
 		setLocationRelativeTo(null);
@@ -93,9 +98,11 @@ public class TranferMoneyUI extends JFrame
 		JButton btnNewButton_1 = new JButton("Cancel", new ImageIcon(img2));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				UI ui= new UI();
+				UI ui= new UI(sql);
 				ui.setVisible(true);
+				dispose();
+				
+				
 			}
 		});
 		btnNewButton_1.setBounds(665, 410, 107, 36);

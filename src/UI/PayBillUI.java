@@ -5,6 +5,9 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import backend_functions.SQLQueryEngine;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -21,14 +24,17 @@ public class PayBillUI extends JFrame
 
 	private static final long serialVersionUID = 7187090446647029621L;
 	private JPanel contentPane;
-
+	private SQLQueryEngine sql;
+	
 	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-search-16.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/ElectricityBill.png")).getImage();
 	Image img3 =new ImageIcon(this.getClass().getResource("/icons8-ok-16.png")).getImage();
 	Image img4 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 	ImageIcon imageIcon =new ImageIcon(img2);
  	private JTextField cusID;
-	public PayBillUI() {
+	public PayBillUI(SQLQueryEngine sqle)
+	{
+		this.sql = sqle;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1016, 695);
 		setLocationRelativeTo(null);
@@ -89,10 +95,9 @@ public class PayBillUI extends JFrame
 		JButton btnNewButton_2 = new JButton("Back",new ImageIcon((img4)));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				UI ui =new UI();
+				UI ui =new UI(sql);
 				ui.setVisible(true);
-				
+				dispose();
 			}
 		});
 		btnNewButton_2.setBounds(722, 419, 85, 31);

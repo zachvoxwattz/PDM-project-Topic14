@@ -9,29 +9,25 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import backend_functions.SQLQueryEngine;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class HistoryUI extends JFrame {
+public class HistoryUI extends JFrame
+{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3065062498405223480L;
 	private JPanel contentPane;
 	private JTable table;
+	private SQLQueryEngine sql;
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
-	 */
-	public HistoryUI() {
+	public HistoryUI(SQLQueryEngine sqle) 
+	{
+		this.sql = sqle;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 936, 713);
 		setLocationRelativeTo(null);
@@ -85,9 +81,9 @@ public class HistoryUI extends JFrame {
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				UI ui = new UI();
+				UI ui = new UI(sql);
 				ui.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(799, 55, 85, 33);

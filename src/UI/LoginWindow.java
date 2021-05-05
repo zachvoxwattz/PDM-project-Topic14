@@ -4,18 +4,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.Color;
+import backend_functions.LoginCredentialsChecker;
+import backend_functions.SQLQueryEngine;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 public class LoginWindow extends JFrame 
@@ -23,104 +23,77 @@ public class LoginWindow extends JFrame
 	private static final long serialVersionUID = -3821183003050026681L;
 
 	private JPanel contentPane;
-	
+	private JLabel pCard, pPin, imageSplash;
 	private JTextField cardNo;
 	private JPasswordField pinCode;
+	private JButton login;
 	
-	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-add-user-male-16.png")).getImage();
-	Image img2 =new ImageIcon(this.getClass().getResource("/if_login_173049.png")).getImage();
-	Image img3 =new ImageIcon(this.getClass().getResource("/mainmenu.jpeg")).getImage();
+	private Image logInButtonIMG, splashIMG;
 	
+	private SQLQueryEngine sql;
+	private LoginCredentialsChecker checker;
 	
-	JButton signin = new JButton("Sign in",new ImageIcon(img1));
-	JButton login = new JButton("Login",new ImageIcon(img2));
-    ImageIcon im=new ImageIcon(img3);
-	
-	public LoginWindow() {
-		this.addWindowListener(new WindowAdapter() {
-		});
+	public LoginWindow(SQLQueryEngine sqle)
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setTitle("Log in Window");
 		setSize(785, 387);
 		setLocationRelativeTo(null);
+		
+		this.sql = sqle;
+		
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(31, 198, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.CYAN);
-		panel.setBounds(348, 0, 423, 356);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		splashIMG = new ImageIcon(this.getClass().getResource("/mainmenu.jpeg")).getImage();
+		imageSplash = new JLabel(new ImageIcon(splashIMG));
+			imageSplash.setBounds(0, 0, 350, 350);
+			contentPane.add(imageSplash);
+
+		pCard = new JLabel("Enter credit card number");
+			pCard.setFont(new Font("Tahoma", Font.BOLD, 20));
+			pCard.setBounds(435, 58, 255, 30);
+			contentPane.add(pCard);
 		
 		cardNo = new JTextField();
-		cardNo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		cardNo.setBounds(89, 92, 256, 29);
-		panel.add(cardNo);
-		cardNo.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("UserName");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setBounds(89, 58, 97, 30);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Password");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(88, 153, 80, 22);
-		panel.add(lblNewLabel_1);
-		
-		
-		signin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					dispose();
-					contentPane.setVisible(false);
-					new SignUpWindow();
-					
-					
+			cardNo.setFont(new Font("Consolas", Font.PLAIN, 24));
+			cardNo.setBounds(430, 92, 266, 40);
+			cardNo.setHorizontalAlignment(JTextField.CENTER);
+			cardNo.setColumns(10);
+			contentPane.add(cardNo);
 			
-					}		
-		});
-		signin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		signin.setBounds(89, 274, 107, 44);
-		panel.add(signin);
-		login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			dispose();
-			UI ui = new UI();
-			ui.setVisible(true);
-				
-			}
-		});
-			
-		
-		
-		login.setFont(new Font("Tahoma", Font.BOLD, 11));
-		login.setBounds(238, 274, 107, 44);
-		panel.add(login);
+		pPin = new JLabel("Enter PIN code of card");
+			pPin.setFont(new Font("Tahoma", Font.BOLD, 20));
+			pPin.setBounds(450, 153, 255, 30);
+			contentPane.add(pPin);
 		
 		pinCode = new JPasswordField();
+			pinCode.setFont(new Font("Consolas", Font.PLAIN, 20));
+			pinCode.setBounds(523, 185, 80, 40);
+			pinCode.setHorizontalAlignment(JPasswordField.CENTER);
+			contentPane.add(pinCode);
 	
-		pinCode.setFont(new Font("Tahoma", Font.BOLD, 13));
-		pinCode.setBounds(88, 185, 256, 29);
-		panel.add(pinCode);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 350, 350);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel_2 = new JLabel(im);
-		lblNewLabel_2.setBounds(0, 0, 350, 350);
-		panel_1.add(lblNewLabel_2);
+		logInButtonIMG = new ImageIcon(this.getClass().getResource("/if_login_173049.png")).getImage();
+		login = new JButton("Login",new ImageIcon(logInButtonIMG));
+			login.setFont(new Font("Consolas", Font.BOLD, 24));
+			login.setBounds(500, 250, 128, 44);
+			checker = new LoginCredentialsChecker(this);
+			login.addActionListener(checker);
+			contentPane.add(login);
+			
+		add(contentPane);
 	}
 	
-	public boolean isFill() 
+	public void showUI()
 	{
-		String passw =  new String(pinCode.getPassword());
-		if (cardNo.getText().isEmpty() || passw.isEmpty()) return false;
-		else return true;
+		UI ui = new UI(sql);
+		ui.setVisible(true);
+		dispose();
 	}
+	
+	public SQLQueryEngine getQueryEngine() { return this.sql; }
+	public String getCardNumber() { return this.cardNo.getText(); }
+	public char[] getCardPIN() { return this.pinCode.getPassword(); }
 }

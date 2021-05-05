@@ -5,10 +5,12 @@ import javax.swing.JPanel;
 
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.border.BevelBorder;
+
+import backend_functions.SQLQueryEngine;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -21,6 +23,8 @@ public class UI extends JFrame
 {
 	private static final long serialVersionUID = -6227506676605276824L;
 	private JPanel contentPane;
+	private SQLQueryEngine sql;
+	
 	JButton ViewInf = new JButton("View Information");
 	JButton TransferMoney = new JButton("Transfer Money");	
 	JButton PayBill = new JButton("Bill Payment");
@@ -35,22 +39,10 @@ public class UI extends JFrame
 	Image img5 =new ImageIcon(this.getClass().getResource("/logout.png")).getImage();
 
 	private final JPanel panel_1 = new JPanel();
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UI frame = new UI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-
-
-	public UI() {
+	public UI(SQLQueryEngine sqle) 
+	{
+		this.sql = sqle;
 		setColor();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 971, 578);
@@ -75,9 +67,9 @@ public class UI extends JFrame
 			
 		ViewInf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ViewInforUI view =new ViewInforUI();
+				ViewInforUI view =new ViewInforUI(sql);
 				view.setVisible(true);
+				dispose();
 				
 				
 			}
@@ -98,9 +90,10 @@ public class UI extends JFrame
 		HisTrans.setIcon(new ImageIcon(img4));
 		HisTrans.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				HistoryUI view =new HistoryUI();
+				HistoryUI view =new HistoryUI(sql);
 				view.setVisible(true);
+				dispose();
+				
 				
 			}
 		});
@@ -121,9 +114,11 @@ public class UI extends JFrame
 		
 		TransferMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				TranferMoneyUI trans =new TranferMoneyUI();
+				TranferMoneyUI trans =new TranferMoneyUI(sql);
 				trans.setVisible(true);
+				dispose();
+				
+				
 			}
 		});
 		TransferMoney.setBounds(733, 249, 162, 43);
@@ -142,9 +137,11 @@ public class UI extends JFrame
 		});
 		PayBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				PayBillUI pay =new PayBillUI();
+				PayBillUI pay =new PayBillUI(sql);
 				pay.setVisible(true);
+				dispose();
+				
+				
 			}
 			
 		});
@@ -165,9 +162,11 @@ public class UI extends JFrame
 			public void actionPerformed(ActionEvent e) {
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure?","Log out?",JOptionPane.YES_NO_OPTION);
 				if(dialogResult==JOptionPane.YES_OPTION) {
-					dispose();
-					LoginWindow login =new LoginWindow();
+					LoginWindow login =new LoginWindow(sql);
 					login.setVisible(true);
+					dispose();
+					
+					
 				}
 			}
 		});
