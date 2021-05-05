@@ -1,8 +1,5 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -17,10 +14,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.MatteBorder;
 
-public class ViewInforUI extends JFrame {
-
+public class ViewInforUI extends JFrame
+{
+	private static final long serialVersionUID = 6093292816844002519L;
 	private JPanel contentPane;
 	private JLabel UserName;
 	
@@ -36,7 +33,8 @@ public class ViewInforUI extends JFrame {
 	 */
 	public ViewInforUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 994, 619);
+		setBounds(0, 0, 994, 619);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

@@ -5,15 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
+import javax.swing.JComboBox;import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,11 +19,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 
 
-public class SignUpWindow    {
-
+public class SignUpWindow
+{
 	private JFrame frame;
 	private JTextField firstNametxt;
 	private JTextField emailtxt;
@@ -60,30 +56,26 @@ public class SignUpWindow    {
 	
 	ImageIcon imgi1 = new ImageIcon(img3);
 	
-	
-	
-	
 	JButton btnNewButton_1 = new JButton("Create",new ImageIcon(img1));
 	JButton backBt = new JButton("Back",new ImageIcon(img2));
-	
 
-	
-	
 	private JPasswordField passwordtxt;
 	private JPasswordField conformtxt;
 	
-	public SignUpWindow() {
+	public SignUpWindow() 
+	{
 		initialize();
 		this.frame.setVisible(true);
-		
-	
 	}
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void initialize() {
+	
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.getContentPane().setForeground(new Color(255, 255, 255));
-		frame.setBounds(100, 40, 898, 771);
+		frame.setBounds(0, 0, 898, 771);
+
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(false);

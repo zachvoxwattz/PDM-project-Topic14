@@ -17,8 +17,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class UI extends JFrame {
-
+public class UI extends JFrame
+{
+	private static final long serialVersionUID = -6227506676605276824L;
 	private JPanel contentPane;
 	JButton ViewInf = new JButton("View Information");
 	JButton TransferMoney = new JButton("Transfer Money");	
@@ -32,12 +33,7 @@ public class UI extends JFrame {
 	Image img3 =new ImageIcon(this.getClass().getResource("/paybill.png")).getImage();
 	Image img4 =new ImageIcon(this.getClass().getResource("/clock.png")).getImage();
 	Image img5 =new ImageIcon(this.getClass().getResource("/logout.png")).getImage();
-	
-	
-	
-	
-	
-	
+
 	private final JPanel panel_1 = new JPanel();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +53,8 @@ public class UI extends JFrame {
 	public UI() {
 		setColor();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 971, 578);
+		setBounds(0, 0, 971, 578);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(102, 0, 255));
 		contentPane.setBackground(Color.WHITE);

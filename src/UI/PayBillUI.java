@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -9,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -19,15 +16,12 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 
-public class PayBillUI extends JFrame {
+public class PayBillUI extends JFrame
+{
 
+	private static final long serialVersionUID = 7187090446647029621L;
 	private JPanel contentPane;
 
-
-
-	/**
-	 * Create the frame.
-	 */
 	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-search-16.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/ElectricityBill.png")).getImage();
 	Image img3 =new ImageIcon(this.getClass().getResource("/icons8-ok-16.png")).getImage();
@@ -36,7 +30,8 @@ public class PayBillUI extends JFrame {
  	private JTextField cusID;
 	public PayBillUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1016, 695);
+		setBounds(0, 0, 1016, 695);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,8 +47,9 @@ public class PayBillUI extends JFrame {
 		lblNewLabel.setBounds(10, 45, 190, 36);
 		panel.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"--", "Water", "Internet", "Television", "Electricity"}));
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<String>
+			(new String[] {"--", "Water", "Internet", "Television", "Electricity"}));
 		comboBox.setBounds(366, 108, 166, 21);
 		panel.add(comboBox);
 		

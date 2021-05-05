@@ -1,20 +1,12 @@
 package ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Image;
@@ -23,12 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
-import java.io.File;
-import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class LoginWindow extends JFrame 
 {
@@ -36,8 +24,9 @@ public class LoginWindow extends JFrame
 
 	private JPanel contentPane;
 	
-	private JTextField Usernametxt;
-	private JPasswordField pass;
+	private JTextField cardNo;
+	private JPasswordField pinCode;
+	
 	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-add-user-male-16.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/if_login_173049.png")).getImage();
 	Image img3 =new ImageIcon(this.getClass().getResource("/mainmenu.jpeg")).getImage();
@@ -52,7 +41,8 @@ public class LoginWindow extends JFrame
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setTitle("Log in Window");
-		setBounds(100, 100, 785, 387);
+		setSize(785, 387);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,11 +55,11 @@ public class LoginWindow extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		Usernametxt = new JTextField();
-		Usernametxt.setFont(new Font("Tahoma", Font.BOLD, 13));
-		Usernametxt.setBounds(89, 92, 256, 29);
-		panel.add(Usernametxt);
-		Usernametxt.setColumns(10);
+		cardNo = new JTextField();
+		cardNo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		cardNo.setBounds(89, 92, 256, 29);
+		panel.add(cardNo);
+		cardNo.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("UserName");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -111,11 +101,11 @@ public class LoginWindow extends JFrame
 		login.setBounds(238, 274, 107, 44);
 		panel.add(login);
 		
-		pass = new JPasswordField();
+		pinCode = new JPasswordField();
 	
-		pass.setFont(new Font("Tahoma", Font.BOLD, 13));
-		pass.setBounds(88, 185, 256, 29);
-		panel.add(pass);
+		pinCode.setFont(new Font("Tahoma", Font.BOLD, 13));
+		pinCode.setBounds(88, 185, 256, 29);
+		panel.add(pinCode);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 350, 350);
@@ -129,8 +119,8 @@ public class LoginWindow extends JFrame
 	
 	public boolean isFill() 
 	{
-		String passw =  new String(pass.getPassword());
-		if (Usernametxt.getText().isEmpty() || passw.isEmpty()) return false;
+		String passw =  new String(pinCode.getPassword());
+		if (cardNo.getText().isEmpty() || passw.isEmpty()) return false;
 		else return true;
 	}
 }

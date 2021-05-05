@@ -20,18 +20,21 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TranferMoneyUI extends JFrame {
-
+public class TranferMoneyUI extends JFrame
+{
+	private static final long serialVersionUID = 6786168069376771108L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	
-	Image img1 =new ImageIcon(this.getClass().getResource("/submit.png")).getImage();
-	Image img2 =new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+	Image img1 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
+	Image img2 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 
-	public TranferMoneyUI() {
+	public TranferMoneyUI()
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1006, 535);
+		setBounds(0, 0, 1006, 535);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setContentPane(contentPane);
@@ -48,8 +51,8 @@ public class TranferMoneyUI extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"--", "Asia Commercial Joint Stock Bank", "Tien Phong Commercial Joint Stock Bank", "Dong A Commercial Joint Stock Bank", "Southeast Asia Commercial Joint Stock Bank", "Saigon Bank for Industry & Trade ", "Military Commercial Joint Stock Bank", "Viet A Commercial Joint Stock Bank", "Mekong Commercial Bank", "VPBank"}));
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"--", "Asia Commercial Joint Stock Bank", "Tien Phong Commercial Joint Stock Bank", "Dong A Commercial Joint Stock Bank", "Southeast Asia Commercial Joint Stock Bank", "Saigon Bank for Industry & Trade ", "Military Commercial Joint Stock Bank", "Viet A Commercial Joint Stock Bank", "Mekong Commercial Bank", "VPBank"}));
 		comboBox.setBounds(340, 72, 279, 21);
 		panel.add(comboBox);
 		
