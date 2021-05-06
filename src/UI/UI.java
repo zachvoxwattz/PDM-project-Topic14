@@ -24,6 +24,7 @@ public class UI extends JFrame
 	private static final long serialVersionUID = -6227506676605276824L;
 	private JPanel contentPane;
 	private SQLQueryEngine sql;
+	private String cardNum;
 	
 	JButton ViewInf = new JButton("View Information");
 	JButton TransferMoney = new JButton("Transfer Money");	
@@ -40,9 +41,9 @@ public class UI extends JFrame
 
 	private final JPanel panel_1 = new JPanel();
 
-	public UI(SQLQueryEngine sqle) 
+	public UI(SQLQueryEngine sqle, String cardNo) 
 	{
-		this.sql = sqle;
+		this.sql = sqle; this.cardNum = cardNo;
 		setColor();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 971, 578);
@@ -67,7 +68,7 @@ public class UI extends JFrame
 			
 		ViewInf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewInforUI view =new ViewInforUI(sql);
+				ViewInforUI view =new ViewInforUI(sql, cardNum);
 				view.setVisible(true);
 				dispose();
 				
@@ -90,7 +91,7 @@ public class UI extends JFrame
 		HisTrans.setIcon(new ImageIcon(img4));
 		HisTrans.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HistoryUI view =new HistoryUI(sql);
+				HistoryUI view =new HistoryUI(sql, cardNum);
 				view.setVisible(true);
 				dispose();
 				
@@ -114,7 +115,7 @@ public class UI extends JFrame
 		
 		TransferMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TranferMoneyUI trans =new TranferMoneyUI(sql);
+				TranferMoneyUI trans = new TranferMoneyUI(sql, cardNum);
 				trans.setVisible(true);
 				dispose();
 				
@@ -137,7 +138,7 @@ public class UI extends JFrame
 		});
 		PayBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PayBillUI pay =new PayBillUI(sql);
+				PayBillUI pay =new PayBillUI(sql, cardNum);
 				pay.setVisible(true);
 				dispose();
 				
@@ -188,8 +189,7 @@ public class UI extends JFrame
 		panel_1.setBounds(0, 0, 957, 162);
 		
 		
-		panel.add(panel_1);
-		
+		panel.add(panel_1); 
 	}
 	public void setColor() {
 		ViewInf.setBackground(new Color(60, 179, 113));

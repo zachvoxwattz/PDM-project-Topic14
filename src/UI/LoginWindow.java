@@ -88,7 +88,7 @@ public class LoginWindow extends JFrame
 	
 	public void showUI()
 	{
-		UI ui = new UI(sql);
+		UI ui = new UI(sql, getCardNumber());
 		ui.setVisible(true);
 		dispose();
 	}

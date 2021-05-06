@@ -24,6 +24,7 @@ public class ViewInforUI extends JFrame
 	private JPanel contentPane;
 	private JLabel UserName;
 	private SQLQueryEngine sql;
+	private String cardNum;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/changePin.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/back.png")).getImage();
@@ -35,9 +36,9 @@ public class ViewInforUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public ViewInforUI(SQLQueryEngine sqle)
+	public ViewInforUI(SQLQueryEngine sqle, String cardNo)
 	{
-		this.sql = sqle;
+		this.sql = sqle; this.cardNum = cardNo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 994, 619);
 		setLocationRelativeTo(null);
@@ -113,7 +114,7 @@ public class ViewInforUI extends JFrame
 				JButton Back = new JButton("Back", new ImageIcon(img2));
 				Back.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						UI ui =new UI(sql);
+						UI ui =new UI(sql, cardNum);
 						ui.setVisible(true);
 						dispose();
 						

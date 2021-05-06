@@ -3,29 +3,33 @@ package backend_functions;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-
-import javax.swing.JOptionPane;
+import java.util.UUID;
 
 public class SQLQueryEngine
 {
 	private Connection conn;
-	private Statement statement;
 	public SQLQueryEngine() {}
 	
-	public boolean checkConnection()
+	public void checkConnection()
 	{
 		try 
-		{ 
-			conn = DriverManager.getConnection(SQLConstraints.ADDRESS);
-			statement = conn.createStatement();
-			
-			if (conn.isValid(5)) 
-			{
-				JOptionPane.showMessageDialog(null,"Our system is currently down. Please try again later!", "Alert", 
-						JOptionPane.WARNING_MESSAGE);
-				
-				return false;
-			}
+		{
+			prepConnection();
+			System.out.println("Connection successfully established");
+			conn.close(); 
+		}
+		catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	public boolean prepConnection()
+	{
+		try 
+		{
+			conn = DriverManager
+					.getConnection(SQLConstraints.REMOTE_ADDRESS,
+										SQLConstraints.USER, 
+											SQLConstraints.PASSWORD);
+			System.out.println("Connection successfully established");
 		}
 		catch (Exception e) {}
 		return true;
@@ -33,16 +37,26 @@ public class SQLQueryEngine
 	
 	public boolean loginCheckCredentials(String cardNo, char[] pin)
 	{
-		String query = "select card_number, pin_code from";
 		return true;
 	}
+	
+	private void addAccounts(String accID, String name, int balance)
+	{
+		prepConnection();
+		String cardUUID = getRandomUUID();
+		String query = "insert into accounts(AccountID, AccountName, CardHolderUUID, Balance)" +
+		"values('" + accID + "', '" + name + "'. '" + cardUUID + "', '" + balance + "')";
+		try ( Statement statement = conn.createStatement(); ) { statement.executeQuery(query); }
+		catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	private String getRandomUUID() { return UUID.randomUUID().toString(); }
 }
 
 class SQLConstraints
 {
-	protected static final String 
-		ADDRESS = "jdbc:sqlserver://localhost:3306;"
-					+ "databaseName=BikeStores;"
-						+ "user=sa;"
-							+ "password=mysqllit1765";
+	protected static final String REMOTE_ADDRESS = "jdbc:mysql://dbproject.3utilities.com/pdm_topic14";
+	protected static final String LOCAL_ADDRESS = "jdbc:mysql://localhost/pdm_topic14";
+	protected static final String USER = "pdm_guest";
+	protected static final String PASSWORD = "mysqllit1765";
 }

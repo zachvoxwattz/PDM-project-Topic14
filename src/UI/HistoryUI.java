@@ -24,10 +24,11 @@ public class HistoryUI extends JFrame
 	private JPanel contentPane;
 	private JTable table;
 	private SQLQueryEngine sql;
+	private String cardNum;
 
-	public HistoryUI(SQLQueryEngine sqle) 
+	public HistoryUI(SQLQueryEngine sqle, String cardNo) 
 	{
-		this.sql = sqle;
+		this.sql = sqle; this.cardNum = cardNo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 936, 713);
 		setLocationRelativeTo(null);
@@ -81,12 +82,12 @@ public class HistoryUI extends JFrame
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UI ui = new UI(sql);
+				UI ui = new UI(sql, cardNum);
 				ui.setVisible(true);
 				dispose();
 			}
 		});
 		btnNewButton.setBounds(799, 55, 85, 33);
-		panel_1.add(btnNewButton);
+		panel_1.add(btnNewButton); 
 	}
 }

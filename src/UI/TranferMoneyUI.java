@@ -30,13 +30,14 @@ public class TranferMoneyUI extends JFrame
 	private JTextField textField;
 	private JTextField textField_1;
 	private SQLQueryEngine sql;
+	private String cardNum;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 
-	public TranferMoneyUI(SQLQueryEngine sqle)
+	public TranferMoneyUI(SQLQueryEngine sqle, String cardNo)
 	{
-		this.sql = sqle;
+		this.sql = sqle; this.cardNum = cardNo;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1006, 535);
 		setLocationRelativeTo(null);
@@ -98,7 +99,7 @@ public class TranferMoneyUI extends JFrame
 		JButton btnNewButton_1 = new JButton("Cancel", new ImageIcon(img2));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UI ui= new UI(sql);
+				UI ui= new UI(sql, cardNum);
 				ui.setVisible(true);
 				dispose();
 				
@@ -106,6 +107,6 @@ public class TranferMoneyUI extends JFrame
 			}
 		});
 		btnNewButton_1.setBounds(665, 410, 107, 36);
-		panel.add(btnNewButton_1);
+		panel.add(btnNewButton_1); 
 	}
 }

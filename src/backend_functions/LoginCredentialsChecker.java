@@ -18,7 +18,7 @@ public class LoginCredentialsChecker implements ActionListener
 	//	if (!logWin.getQueryEngine().checkConnection()) return;
 	//	if (checkInputs()) 
 	//			if (logWin.getQueryEngine().loginCheckCredentials(logWin.getCardNumber(), logWin.getCardPIN())) 
-					logWin.showUI();
+		if (checkInputs()) logWin.showUI();
 	}
 	
 	public boolean checkInputs() 
@@ -33,7 +33,7 @@ public class LoginCredentialsChecker implements ActionListener
 		
 		else if (logWin.getCardNumber().length() != 16)
 		{
-			JOptionPane.showMessageDialog(null, "Card number must have 16 digits!", "Error", 
+			JOptionPane.showMessageDialog(null, "Incorrect card number: It must have 16 digits!", "Error", 
 				JOptionPane.WARNING_MESSAGE);
 		}
 		
@@ -46,7 +46,7 @@ public class LoginCredentialsChecker implements ActionListener
 	{
 		if (logWin.getCardPIN().length == 0) 
 		{
-			JOptionPane.showMessageDialog(null,"This field can not be empty!", "Error", 
+			JOptionPane.showMessageDialog(null,"Password can not be empty!", "Error", 
 				JOptionPane.WARNING_MESSAGE);
 			
 			return false;
@@ -54,13 +54,10 @@ public class LoginCredentialsChecker implements ActionListener
 		
 		else if (logWin.getCardPIN().length != 6)
 		{
-			JOptionPane.showMessageDialog(null,"Incorrect Password", "Error", 
+			JOptionPane.showMessageDialog(null,"Incorrect Password", "Warning", 
 					JOptionPane.WARNING_MESSAGE);
-			
-			System.out.println(logWin.getCardPIN());
 			return false;
 		}
-		
 		else return true;
 	}
 }
