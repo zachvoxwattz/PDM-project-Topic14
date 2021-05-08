@@ -95,5 +95,5 @@ public class LoginWindow extends JFrame
 	
 	public SQLQueryEngine getQueryEngine() { return this.sql; }
 	public String getCardNumber() { return this.cardNo.getText(); }
-	public char[] getCardPIN() { return this.pinCode.getPassword(); }
+	public String getCardPIN() { return String.valueOf(this.pinCode.getPassword()); }
 }

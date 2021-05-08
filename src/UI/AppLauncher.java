@@ -13,7 +13,7 @@ public class AppLauncher
 			@Override
 			public void run() 
 			{
-				SQLQueryEngine sql = new SQLQueryEngine(); sql.prepConnection();
+				SQLQueryEngine sql = new SQLQueryEngine();
 				LoginWindow logWin = new LoginWindow(sql);	
 					logWin.setVisible(true);
 			}

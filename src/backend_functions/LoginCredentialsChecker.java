@@ -10,15 +10,25 @@ import ui.LoginWindow;
 public class LoginCredentialsChecker implements ActionListener
 {
 	private LoginWindow logWin;
-	public LoginCredentialsChecker(LoginWindow lw) { this.logWin = lw; }
+	private SQLQueryEngine sql;
+	private String cardNo, pin;
+	
+	public LoginCredentialsChecker(LoginWindow lw) 
+	{ 
+		this.logWin = lw;
+		this.sql = logWin.getQueryEngine();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-	//	if (!logWin.getQueryEngine().checkConnection()) return;
-	//	if (checkInputs()) 
-	//			if (logWin.getQueryEngine().loginCheckCredentials(logWin.getCardNumber(), logWin.getCardPIN())) 
-		if (checkInputs()) logWin.showUI();
+		cardNo = logWin.getCardNumber(); pin = logWin.getCardPIN();
+		if (sql.testConnection())
+		{
+			
+			if (checkInputs())
+				if (sql.loginCheckCredentials(cardNo, pin)) logWin.showUI();
+		}
 	}
 	
 	public boolean checkInputs() 
@@ -44,7 +54,10 @@ public class LoginCredentialsChecker implements ActionListener
 	
 	public boolean checkPassword()
 	{
-		if (logWin.getCardPIN().length == 0) 
+		if (pin.contains("0123456789")) System.out.println("matched");
+		else System.out.println("unmatched");
+		
+		if (logWin.getCardPIN().length() == 0) 
 		{
 			JOptionPane.showMessageDialog(null,"Password can not be empty!", "Error", 
 				JOptionPane.WARNING_MESSAGE);
@@ -52,7 +65,7 @@ public class LoginCredentialsChecker implements ActionListener
 			return false;
 		}
 		
-		else if (logWin.getCardPIN().length != 6)
+		else if (logWin.getCardPIN().length() != 6)
 		{
 			JOptionPane.showMessageDialog(null,"Incorrect Password", "Warning", 
 					JOptionPane.WARNING_MESSAGE);
