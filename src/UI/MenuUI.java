@@ -9,7 +9,9 @@ import java.awt.Image;
 
 import javax.swing.border.BevelBorder;
 
+import backend_functions.AlterButtonColor;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,19 +21,20 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class UI extends JFrame
+public class MenuUI extends JFrame
 {
 	private static final long serialVersionUID = -6227506676605276824L;
 	private JPanel contentPane;
 	private SQLQueryEngine sql;
-	private String cardNum;
+	private User usr;
 	
-	JButton ViewInf = new JButton("View Information");
-	JButton TransferMoney = new JButton("Transfer Money");	
-	JButton PayBill = new JButton("Bill Payment");
-	JButton HisTrans = new JButton("History Transaction");	
-	JButton Exitbn = new JButton("    Log out");
+	JButton vinfo = new JButton("View Information");
+	JButton transfer = new JButton("Transfer Money");	
+	JButton settle = new JButton("Bill Payment");
+	JButton history = new JButton("History Transaction");	
+	JButton exit = new JButton("Log out");
 	
+	private JLabel welcome;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/man-user.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
@@ -41,104 +44,90 @@ public class UI extends JFrame
 
 	private final JPanel panel_1 = new JPanel();
 
-	public UI(SQLQueryEngine sqle, String cardNo) 
+	public MenuUI(SQLQueryEngine sqle, User us)
 	{
-		this.sql = sqle; this.cardNum = cardNo;
+		this.sql = sqle; this.usr = us;
+		
 		setColor();
+		setTitle("Menu Selection");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 971, 578);
 		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(102, 0, 255));
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		ViewInf.setIcon(new ImageIcon(img1));
-		ViewInf.addMouseListener(new MouseAdapter() {
+		
+		vinfo.setIcon(new ImageIcon(img1));
+		vinfo.addMouseListener(new AlterButtonColor(this, vinfo));
+	
+		vinfo.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				InfoUI view =new InfoUI(sql, usr);
+				view.setVisible(true);
+				dispose();	
+			}
+		});
+		
+		vinfo.setBounds(47, 249, 176, 43);
+		contentPane.add(vinfo);
+		history.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				ViewInf.setBackground(Color.ORANGE);
+				history.setBackground(Color.ORANGE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setColor();
 			}
 		});
-			
-		ViewInf.addActionListener(new ActionListener() {
+		
+		history.setIcon(new ImageIcon(img4));
+		history.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewInforUI view =new ViewInforUI(sql, cardNum);
+				HistoryUI view =new HistoryUI(sql, usr);
 				view.setVisible(true);
 				dispose();
 				
 				
 			}
 		});
-		ViewInf.setBounds(47, 249, 176, 43);
-		contentPane.add(ViewInf);
-		HisTrans.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				HisTrans.setBackground(Color.ORANGE);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				setColor();
-			}
-		});
+		history.setBounds(47, 336, 176, 43);
+		contentPane.add(history);
 		
-		HisTrans.setIcon(new ImageIcon(img4));
-		HisTrans.addActionListener(new ActionListener() {
+		transfer.setIcon(new ImageIcon(img2));
+		transfer.addMouseListener(new AlterButtonColor(this, transfer));
+		
+		transfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HistoryUI view =new HistoryUI(sql, cardNum);
-				view.setVisible(true);
-				dispose();
-				
-				
-			}
-		});
-		HisTrans.setBounds(47, 336, 176, 43);
-		contentPane.add(HisTrans);
-		
-		TransferMoney.setIcon(new ImageIcon(img2));
-		TransferMoney.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				TransferMoney.setBackground(Color.ORANGE);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				setColor();
-			}
-		});
-		
-		TransferMoney.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TranferMoneyUI trans = new TranferMoneyUI(sql, cardNum);
+				TransferUI trans = new TransferUI(sql, usr);
 				trans.setVisible(true);
 				dispose();
 				
 				
 			}
 		});
-		TransferMoney.setBounds(733, 249, 162, 43);
-		contentPane.add(TransferMoney);
+		transfer.setBounds(733, 249, 162, 43);
+		contentPane.add(transfer);
 		
-		PayBill.setIcon(new ImageIcon(img3));
-		PayBill.addMouseListener(new MouseAdapter() {
+		settle.setIcon(new ImageIcon(img3));
+		settle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				PayBill.setBackground(Color.ORANGE);
+				settle.setBackground(Color.ORANGE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setColor();
 			}
 		});
-		PayBill.addActionListener(new ActionListener() {
+		settle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PayBillUI pay =new PayBillUI(sql, cardNum);
+				SettleBillUI pay =new SettleBillUI(sql, usr);
 				pay.setVisible(true);
 				dispose();
 				
@@ -146,20 +135,20 @@ public class UI extends JFrame
 			}
 			
 		});
-		PayBill.setBounds(733, 336, 162, 43);
-		contentPane.add(PayBill);
-		Exitbn.setIcon(new ImageIcon(img5));
-		Exitbn.addMouseListener(new MouseAdapter() {
+		settle.setBounds(733, 336, 162, 43);
+		contentPane.add(settle);
+		exit.setIcon(new ImageIcon(img5));
+		exit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Exitbn.setBackground(Color.ORANGE);
+				exit.setBackground(Color.ORANGE);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setColor();
 			}
 		});
-		Exitbn.addActionListener(new ActionListener() {
+		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure?","Log out?",JOptionPane.YES_NO_OPTION);
 				if(dialogResult==JOptionPane.YES_OPTION) {
@@ -171,8 +160,8 @@ public class UI extends JFrame
 				}
 			}
 		});
-		Exitbn.setBounds(733, 429, 162, 43);
-		contentPane.add(Exitbn);
+		exit.setBounds(733, 429, 162, 43);
+		contentPane.add(exit);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 957, 541);
@@ -189,15 +178,17 @@ public class UI extends JFrame
 		panel_1.setBounds(0, 0, 957, 162);
 		
 		
-		panel.add(panel_1); 
+		panel.add(panel_1);
+		
+		add(contentPane);
 	}
 	public void setColor() {
-		ViewInf.setBackground(new Color(60, 179, 113));
-		TransferMoney.setBackground(new Color(60, 179, 113));
-		HisTrans.setBackground(new Color(60, 179, 113));
-		PayBill.setBackground(new Color(60, 179, 113));
-		Exitbn.setBackground(new Color(60, 179, 113));
-		
+		vinfo.setBackground(new Color(60, 179, 113));
+		transfer.setBackground(new Color(60, 179, 113));
+		history.setBackground(new Color(60, 179, 113));
+		settle.setBackground(new Color(60, 179, 113));
+		exit.setBackground(new Color(60, 179, 113));
 	}
 
+	public SQLQueryEngine getQEngine() { return this.sql; }
 }

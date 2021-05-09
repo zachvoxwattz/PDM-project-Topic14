@@ -10,7 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import backend_functions.DisplayMenu;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -24,11 +26,13 @@ public class HistoryUI extends JFrame
 	private JPanel contentPane;
 	private JTable table;
 	private SQLQueryEngine sql;
-	private String cardNum;
-
-	public HistoryUI(SQLQueryEngine sqle, String cardNo) 
+	private User us;
+	private DisplayMenu dm;
+	
+	public HistoryUI(SQLQueryEngine sqle, User u) 
 	{
-		this.sql = sqle; this.cardNum = cardNo;
+		this.sql = sqle; this.us = u;
+		dm = new DisplayMenu(u, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 936, 713);
 		setLocationRelativeTo(null);
@@ -80,14 +84,10 @@ public class HistoryUI extends JFrame
 		panel_1.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Back");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UI ui = new UI(sql, cardNum);
-				ui.setVisible(true);
-				dispose();
-			}
-		});
+		btnNewButton.addActionListener(dm);
 		btnNewButton.setBounds(799, 55, 85, 33);
 		panel_1.add(btnNewButton); 
 	}
+	
+	public SQLQueryEngine getQEngine() { return this.sql; }
 }

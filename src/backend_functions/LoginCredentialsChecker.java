@@ -1,6 +1,7 @@
 package backend_functions;
 
 import java.awt.event.ActionEvent;
+import java.util.regex.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
@@ -27,7 +28,21 @@ public class LoginCredentialsChecker implements ActionListener
 		{
 			
 			if (checkInputs())
-				if (sql.loginCheckCredentials(cardNo, pin)) logWin.showUI();
+			{
+				if (sql.loginCheckCardNumber(cardNo)) 
+				{
+					if (sql.loginCheckCardPIN(pin)) 
+					{
+						User us = new User(cardNo, pin);
+						us.setName(sql.getCardOwnerName(cardNo));
+						logWin.showUI(us);
+					}
+					else JOptionPane.showMessageDialog(null,"Incorrect PIN code", "Error", 
+							JOptionPane.WARNING_MESSAGE);
+				}
+				else JOptionPane.showMessageDialog(null,"Card number does not exist", "Error", 
+						JOptionPane.WARNING_MESSAGE);
+			}
 		}
 	}
 	
@@ -54,23 +69,35 @@ public class LoginCredentialsChecker implements ActionListener
 	
 	public boolean checkPassword()
 	{
-		if (pin.contains("0123456789")) System.out.println("matched");
-		else System.out.println("unmatched");
-		
 		if (logWin.getCardPIN().length() == 0) 
 		{
-			JOptionPane.showMessageDialog(null,"Password can not be empty!", "Error", 
+			JOptionPane.showMessageDialog(null,"PIN code can not be empty! Please try again", "Error", 
 				JOptionPane.WARNING_MESSAGE);
 			
 			return false;
 		}
 		
-		else if (logWin.getCardPIN().length() != 6)
+		else if (logWin.getCardPIN().length() < 6)
 		{
-			JOptionPane.showMessageDialog(null,"Incorrect Password", "Warning", 
+			JOptionPane.showMessageDialog(null,"PIN code is too short! Please try again", "Warning", 
 					JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
+		
+		else if (logWin.getCardPIN().length() > 6)
+		{
+			JOptionPane.showMessageDialog(null,"PIN code is too long! Please try again", "Warning", 
+					JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		
+		else if (!Pattern.matches("[0-9]+", pin)) 
+		{
+			JOptionPane.showMessageDialog(null,"PIN code contains special characters! Only numeric digits from 0 to 9 is permitted", "Error", 
+					JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+		
 		else return true;
 	}
 }

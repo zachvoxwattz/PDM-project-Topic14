@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import backend_functions.LoginCredentialsChecker;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -82,13 +83,16 @@ public class LoginWindow extends JFrame
 			checker = new LoginCredentialsChecker(this);
 			login.addActionListener(checker);
 			contentPane.add(login);
+		
+		cardNo.setText("4040505060607070");
+		pinCode.setText("017650");
 			
 		add(contentPane);
 	}
 	
-	public void showUI()
+	public void showUI(User s)
 	{
-		UI ui = new UI(sql, getCardNumber());
+		MenuUI ui = new MenuUI(sql, s);
 		ui.setVisible(true);
 		dispose();
 	}

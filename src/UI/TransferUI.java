@@ -17,27 +17,31 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
 
+import backend_functions.DisplayMenu;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TranferMoneyUI extends JFrame
+public class TransferUI extends JFrame
 {
 	private static final long serialVersionUID = 6786168069376771108L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private SQLQueryEngine sql;
-	private String cardNum;
+	private User us;
+	private DisplayMenu dm;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/transfer-money.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 
-	public TranferMoneyUI(SQLQueryEngine sqle, String cardNo)
+	public TransferUI(SQLQueryEngine sqle, User S)
 	{
-		this.sql = sqle; this.cardNum = cardNo;
+		this.sql = sqle; this.us = S;
+		dm = new DisplayMenu(us, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1006, 535);
 		setLocationRelativeTo(null);
@@ -97,16 +101,10 @@ public class TranferMoneyUI extends JFrame
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancel", new ImageIcon(img2));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UI ui= new UI(sql, cardNum);
-				ui.setVisible(true);
-				dispose();
-				
-				
-			}
-		});
+		btnNewButton_1.addActionListener(dm);
 		btnNewButton_1.setBounds(665, 410, 107, 36);
 		panel.add(btnNewButton_1); 
 	}
+	
+	public SQLQueryEngine getQEngine() { return this.sql; }
 }

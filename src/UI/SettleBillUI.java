@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import backend_functions.DisplayMenu;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -19,13 +21,15 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 
-public class PayBillUI extends JFrame
+public class SettleBillUI extends JFrame
 {
 
 	private static final long serialVersionUID = 7187090446647029621L;
 	private JPanel contentPane;
 	private SQLQueryEngine sql;
 	private String cardNum;
+	private DisplayMenu dm;
+	private User us;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/icons8-search-16.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/ElectricityBill.png")).getImage();
@@ -33,9 +37,10 @@ public class PayBillUI extends JFrame
 	Image img4 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 	ImageIcon imageIcon =new ImageIcon(img2);
  	private JTextField cusID;
-	public PayBillUI(SQLQueryEngine sqle, String cardNo)
+	public SettleBillUI(SQLQueryEngine sqle, User u)
 	{
-		this.sql = sqle; this.cardNum = cardNo;
+		this.sql = sqle; this.us = u;
+		dm = new DisplayMenu(u, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1016, 695);
 		setLocationRelativeTo(null);
@@ -94,14 +99,10 @@ public class PayBillUI extends JFrame
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Back",new ImageIcon((img4)));
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UI ui =new UI(sql, cardNum);
-				ui.setVisible(true);
-				dispose();
-			}
-		});
+		btnNewButton_2.addActionListener(dm);
 		btnNewButton_2.setBounds(722, 419, 85, 31);
 		panel_1.add(btnNewButton_2); 
 	}
+	
+	public SQLQueryEngine getQEngine() { return this.sql; }
 }

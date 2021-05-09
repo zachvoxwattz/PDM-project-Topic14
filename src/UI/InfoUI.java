@@ -5,7 +5,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import backend_functions.DisplayMenu;
 import backend_functions.SQLQueryEngine;
+import backend_functions.User;
 
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -18,13 +20,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ViewInforUI extends JFrame
+public class InfoUI extends JFrame
 {
 	private static final long serialVersionUID = 6093292816844002519L;
 	private JPanel contentPane;
 	private JLabel UserName;
 	private SQLQueryEngine sql;
-	private String cardNum;
+	private User us;
+	private DisplayMenu dm;
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/changePin.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/back.png")).getImage();
@@ -36,9 +39,10 @@ public class ViewInforUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public ViewInforUI(SQLQueryEngine sqle, String cardNo)
+	public InfoUI(SQLQueryEngine sqle, User s)
 	{
-		this.sql = sqle; this.cardNum = cardNo;
+		this.sql = sqle; this.us = s;
+		dm = new DisplayMenu(us, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 994, 619);
 		setLocationRelativeTo(null);
@@ -112,15 +116,7 @@ public class ViewInforUI extends JFrame
 				panel.add(Email);
 				
 				JButton Back = new JButton("Back", new ImageIcon(img2));
-				Back.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						UI ui =new UI(sql, cardNum);
-						ui.setVisible(true);
-						dispose();
-						
-						
-					}
-				});
+				Back.addActionListener(dm);
 				Back.setBounds(783, 421, 102, 42);
 				panel.add(Back);
 				
@@ -141,4 +137,6 @@ public class ViewInforUI extends JFrame
 				lblNewLabel_7.setBounds(541, 46, 71, 17);
 				panel.add(lblNewLabel_7);
 	}
+	
+	public SQLQueryEngine getQEngine() { return this.sql; }
 }
