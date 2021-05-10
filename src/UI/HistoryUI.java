@@ -96,7 +96,6 @@ public class HistoryUI extends JFrame
 			}	
 			dtm.addRow(dataVect3);
 		}
-		
 		table.setModel(dtm);
 		repaint();
 	}

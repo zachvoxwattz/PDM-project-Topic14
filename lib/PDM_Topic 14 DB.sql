@@ -26,7 +26,6 @@ CREATE TABLE `accounts` (
   `accountID` decimal(12,0) NOT NULL,
   `accountName` varchar(200) NOT NULL,
   `cardsetUUID` varchar(36) NOT NULL,
-  `balance` decimal(15,2) DEFAULT '0.00',
   PRIMARY KEY (`accountID`,`cardsetUUID`),
   UNIQUE KEY `accountID_UNIQUE` (`accountID`),
   UNIQUE KEY `cardsetUUID_UNIQUE` (`cardsetUUID`)
@@ -39,7 +38,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (666,'Satan','thisissatancard',0.00),(1765,'Zainey Bingham','thisiszaineycard',0.00),(2710,'Raven Bebe','thisisravencard',0.00),(8888,'Harry Doolie','thisisharrycard',0.00);
+INSERT INTO `accounts` VALUES (666,'Satan','thisissatancard'),(1765,'Zainey Bingham','thisiszaineycard'),(2710,'Raven Bebe','thisisravencard'),(8888,'Harry Doolie','thisisharrycard');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,9 +79,10 @@ CREATE TABLE `cards` (
   `cardsetUUID` varchar(36) NOT NULL,
   `cardNo` decimal(16,0) NOT NULL,
   `expDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `balance` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `pin` decimal(6,0) NOT NULL,
+  `balance` decimal(16,0) NOT NULL DEFAULT '0',
+  `pin` varchar(6) NOT NULL,
   `statusID` varchar(2) NOT NULL DEFAULT 'OP',
+  `isDefault` varchar(3) NOT NULL DEFAULT 'NO',
   PRIMARY KEY (`cardNo`),
   UNIQUE KEY `cardNo_UNIQUE` (`cardNo`),
   KEY `test_idx` (`cardsetUUID`),
@@ -98,7 +98,7 @@ CREATE TABLE `cards` (
 
 LOCK TABLES `cards` WRITE;
 /*!40000 ALTER TABLE `cards` DISABLE KEYS */;
-INSERT INTO `cards` VALUES ('thisissatancard',1007,'2021-05-07 15:44:50',5637.00,900009,'LK'),('thisissatancard',1765,'2021-05-07 15:44:50',2101.00,779807,'OP'),('thisiszaineycard',1766,'2021-05-07 15:44:50',9467.00,826173,'OP'),('thisissatancard',2004,'2021-05-07 15:44:50',4992.00,322369,'OP'),('thisissatancard',2710,'2021-05-07 15:44:50',8188.00,900009,'ST'),('thisiszaineycard',2783,'2021-05-07 15:44:50',5637.00,900009,'LK'),('thisissatancard',3516,'2021-05-07 15:44:50',1790.00,324085,'OP'),('thisisravencard',3981,'2021-05-07 15:44:50',2724.00,539335,'OP'),('thisisharrycard',4444,'2021-05-07 17:27:28',90.00,777777,'OP'),('thisissatancard',4681,'2021-05-07 15:44:50',9223.00,447139,'OP'),('thisiszaineycard',6573,'2021-05-07 15:44:50',5637.00,381910,'OP'),('thisisravencard',6857,'2021-05-07 15:44:50',5637.00,984657,'OP'),('thisissatancard',7584,'2021-05-07 15:44:50',5637.00,573564,'OP');
+INSERT INTO `cards` VALUES ('thisissatancard',1007,'2021-05-07 15:44:50',15000000,'900009','LK','YES'),('thisissatancard',1765,'2021-05-07 15:44:50',3500000,'779807','OP','NO'),('thisiszaineycard',1766,'2021-05-07 15:44:50',6250000,'826173','OP','NO'),('thisissatancard',2004,'2021-05-07 15:44:50',1250000,'322369','OP','NO'),('thisissatancard',2710,'2021-05-07 15:44:50',3745000,'900009','ST','NO'),('thisiszaineycard',2783,'2021-05-07 15:44:50',9805000,'900009','LK','NO'),('thisissatancard',3516,'2021-05-07 15:44:50',246570000,'324085','OP','NO'),('thisisravencard',3981,'2021-05-07 15:44:50',10000000,'539335','OP','YES'),('thisisharrycard',4444,'2021-05-07 17:27:28',67000000,'777777','OP','YES'),('thisissatancard',4681,'2021-05-07 15:44:50',7300000,'447139','OP','NO'),('thisiszaineycard',6573,'2021-05-07 15:44:50',4950000,'381910','OP','NO'),('thisisravencard',6857,'2021-05-07 15:44:50',5525000,'984657','OP','NO'),('thisissatancard',7584,'2021-05-07 15:44:50',8263000,'573564','OP','NO'),('thisiszaineycard',4040505060607070,'2021-05-08 08:10:57',20500000,'017650','OP','YES');
 /*!40000 ALTER TABLE `cards` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,6 +123,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES ('1_3','Warp 1 - District 3'),('2_10','Warp 2 - District 10'),('2_3','Warp 2 - District 3'),('5_10','Warp 5 - District 10'),('6_3','Warp 6 - District 3'),('8_10','Warp 8 - District 10'),('bn_1','Ben Nghe Warp - District 1'),('dk_1','Da Kao Warp - District 1'),('lt_td','Linh Trung Warp - Thu Duc District'),('pm_3','Phu My Warp - District 7'),('tp_3','Tan Phu Warp - District 7'),('tq_3','Tan Quy Warp - District 7');
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,6 +164,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES ('0242c3f3-d2a6-4b1d-a3f8-8eb6f684e8bc','TS',1765,4040505060607070,2710,'8_10','2021-05-10 06:19:21',600000.00,'Chuyen khoan ve tai khoan cua ban'),('7a304fa3-906b-44cd-b3e7-2893c28e0cf8','TS',1765,4040505060607070,2710,'8_10','2021-05-10 06:18:31',1200000.00,''),('sample','WD',2710,3981,1765,'lt_td','2021-05-10 06:00:37',125000.00,'Sample Test Transaction');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-08 13:55:09
+-- Dump completed on 2021-05-10 14:22:16
