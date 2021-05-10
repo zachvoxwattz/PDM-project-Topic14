@@ -2,7 +2,7 @@ package ui;
 
 import java.awt.EventQueue;
 
-import backend_functions.SQLQueryEngine;
+import backend_functions.SQLQueryClient;
 
 public class AppLauncher
 {
@@ -13,7 +13,7 @@ public class AppLauncher
 			@Override
 			public void run() 
 			{
-				SQLQueryEngine sql = new SQLQueryEngine();
+				SQLQueryClient sql = new SQLQueryClient();
 				LoginWindow logWin = new LoginWindow(sql);	
 					logWin.setVisible(true);
 			}

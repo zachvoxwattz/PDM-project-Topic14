@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import backend_functions.DisplayMenu;
-import backend_functions.SQLQueryEngine;
+import backend_functions.SQLQueryClient;
 import backend_functions.User;
 
 import javax.swing.JLabel;
@@ -15,8 +15,6 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,8 +24,7 @@ public class SettleBillUI extends JFrame
 
 	private static final long serialVersionUID = 7187090446647029621L;
 	private JPanel contentPane;
-	private SQLQueryEngine sql;
-	private String cardNum;
+	private SQLQueryClient sql;
 	private DisplayMenu dm;
 	private User us;
 	
@@ -37,10 +34,11 @@ public class SettleBillUI extends JFrame
 	Image img4 =new ImageIcon(this.getClass().getResource("/icons8-go-back-16.png")).getImage();
 	ImageIcon imageIcon =new ImageIcon(img2);
  	private JTextField cusID;
-	public SettleBillUI(SQLQueryEngine sqle, User u)
+ 	
+	public SettleBillUI(SQLQueryClient sqle, User u)
 	{
 		this.sql = sqle; this.us = u;
-		dm = new DisplayMenu(u, this);
+		dm = new DisplayMenu(us, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1016, 695);
 		setLocationRelativeTo(null);
@@ -104,5 +102,5 @@ public class SettleBillUI extends JFrame
 		panel_1.add(btnNewButton_2); 
 	}
 	
-	public SQLQueryEngine getQEngine() { return this.sql; }
+	public SQLQueryClient getQEngine() { return this.sql; }
 }

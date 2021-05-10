@@ -11,13 +11,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import backend_functions.DisplayMenu;
-import backend_functions.SQLQueryEngine;
+import backend_functions.SQLQueryClient;
 import backend_functions.User;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class HistoryUI extends JFrame
 {
@@ -25,14 +23,14 @@ public class HistoryUI extends JFrame
 	private static final long serialVersionUID = 3065062498405223480L;
 	private JPanel contentPane;
 	private JTable table;
-	private SQLQueryEngine sql;
+	private SQLQueryClient sql;
 	private User us;
 	private DisplayMenu dm;
 	
-	public HistoryUI(SQLQueryEngine sqle, User u) 
+	public HistoryUI(SQLQueryClient sqle, User u) 
 	{
 		this.sql = sqle; this.us = u;
-		dm = new DisplayMenu(u, this);
+		dm = new DisplayMenu(us, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 936, 713);
 		setLocationRelativeTo(null);
@@ -89,5 +87,5 @@ public class HistoryUI extends JFrame
 		panel_1.add(btnNewButton); 
 	}
 	
-	public SQLQueryEngine getQEngine() { return this.sql; }
+	public SQLQueryClient getQEngine() { return this.sql; }
 }

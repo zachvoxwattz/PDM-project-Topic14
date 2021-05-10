@@ -6,7 +6,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import backend_functions.DisplayMenu;
-import backend_functions.SQLQueryEngine;
+import backend_functions.SQLQueryClient;
 import backend_functions.User;
 
 import javax.swing.JLabel;
@@ -25,7 +25,7 @@ public class InfoUI extends JFrame
 	private static final long serialVersionUID = 6093292816844002519L;
 	private JPanel contentPane;
 	private JLabel UserName;
-	private SQLQueryEngine sql;
+	private SQLQueryClient sql;
 	private User us;
 	private DisplayMenu dm;
 	
@@ -39,7 +39,7 @@ public class InfoUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public InfoUI(SQLQueryEngine sqle, User s)
+	public InfoUI(SQLQueryClient sqle, User s)
 	{
 		this.sql = sqle; this.us = s;
 		dm = new DisplayMenu(us, this);
@@ -138,5 +138,5 @@ public class InfoUI extends JFrame
 				panel.add(lblNewLabel_7);
 	}
 	
-	public SQLQueryEngine getQEngine() { return this.sql; }
+	public SQLQueryClient getQEngine() { return this.sql; }
 }

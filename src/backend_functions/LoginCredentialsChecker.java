@@ -11,7 +11,7 @@ import ui.LoginWindow;
 public class LoginCredentialsChecker implements ActionListener
 {
 	private LoginWindow logWin;
-	private SQLQueryEngine sql;
+	private SQLQueryClient sql;
 	private String cardNo, pin;
 	
 	public LoginCredentialsChecker(LoginWindow lw) 

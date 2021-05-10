@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import backend_functions.LoginCredentialsChecker;
-import backend_functions.SQLQueryEngine;
+import backend_functions.SQLQueryClient;
 import backend_functions.User;
 
 import javax.swing.JTextField;
@@ -31,10 +31,10 @@ public class LoginWindow extends JFrame
 	
 	private Image logInButtonIMG, splashIMG;
 	
-	private SQLQueryEngine sql;
+	private SQLQueryClient sql;
 	private LoginCredentialsChecker checker;
 	
-	public LoginWindow(SQLQueryEngine sqle)
+	public LoginWindow(SQLQueryClient sqle)
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setTitle("Log in Window");
@@ -97,7 +97,7 @@ public class LoginWindow extends JFrame
 		dispose();
 	}
 	
-	public SQLQueryEngine getQueryEngine() { return this.sql; }
+	public SQLQueryClient getQueryEngine() { return this.sql; }
 	public String getCardNumber() { return this.cardNo.getText(); }
 	public String getCardPIN() { return String.valueOf(this.pinCode.getPassword()); }
 }
