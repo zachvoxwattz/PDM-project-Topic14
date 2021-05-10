@@ -14,11 +14,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
-import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class InfoUI extends JFrame
 {
@@ -59,83 +56,48 @@ public class InfoUI extends JFrame
 		contentPane.add(UserInfor);
 		UserInfor.setOpaque(true);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(UIManager.getBorder("InternalFrame.border"));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 84, 980, 498);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
 		UserName = new JLabel("New label");
 		UserName.setBounds(542, 92, 87, 21);
-		panel.add(UserName);
+		contentPane.add(UserName);
 		
-		JLabel lblNewLabel = new JLabel("User Name");
+		JLabel lblNewLabel = new JLabel("Account Name");
 		lblNewLabel.setBounds(215, 87, 126, 30);
-		panel.add(lblNewLabel);
+		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Birth Day");
-		lblNewLabel_1.setBounds(215, 146, 146, 30);
-		panel.add(lblNewLabel_1);
-		
-				
-				JLabel lblNewLabel_3 = new JLabel("Sex");
-				lblNewLabel_3.setBounds(217, 205, 77, 23);
-				panel.add(lblNewLabel_3);
-				
-				JLabel lblNewLabel_4 = new JLabel("Address");
-				lblNewLabel_4.setBounds(217, 250, 102, 29);
-				panel.add(lblNewLabel_4);
-				
-				JLabel lblNewLabel_5 = new JLabel("Phone Number");
-				lblNewLabel_5.setBounds(217, 302, 102, 23);
-				panel.add(lblNewLabel_5);
-				
-				JLabel lblNewLabel_6 = new JLabel("Email");
-				lblNewLabel_6.setBounds(217, 352, 77, 30);
-				panel.add(lblNewLabel_6);
 				
 				JLabel BirthDay = new JLabel("New label");
 				BirthDay.setBounds(542, 151, 87, 21);
-				panel.add(BirthDay);
+				contentPane.add(BirthDay);
 				
 				JLabel Sex = new JLabel("New label");
 				Sex.setBounds(542, 201, 102, 30);
-				panel.add(Sex);
+				contentPane.add(Sex);
 				
 				JLabel Address = new JLabel("New label");
 				Address.setBounds(542, 252, 87, 24);
-				panel.add(Address);
+				contentPane.add(Address);
 				
 				JLabel PhoneNumber = new JLabel("New label");
 				PhoneNumber.setBounds(542, 304, 87, 18);
-				panel.add(PhoneNumber);
+				contentPane.add(PhoneNumber);
 				
 				JLabel Email = new JLabel("New label");
 				Email.setBounds(541, 352, 88, 30);
-				panel.add(Email);
+				contentPane.add(Email);
 				
 				JButton Back = new JButton("Back", new ImageIcon(img2));
 				Back.addActionListener(dm);
 				Back.setBounds(783, 421, 102, 42);
-				panel.add(Back);
-				
-				JButton ChangePinbn = new JButton("Change Pin", new ImageIcon(img1));
-				ChangePinbn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				ChangePinbn.setBounds(603, 421, 126, 42);
-				panel.add(ChangePinbn);
+				contentPane.add(Back);
 				
 				JLabel accNum = new JLabel("Account Number");
 				accNum.setHorizontalAlignment(SwingConstants.LEFT);
 				accNum.setBounds(215, 44, 102, 21);
-				panel.add(accNum);
+				contentPane.add(accNum);
 				
 				JLabel lblNewLabel_7 = new JLabel("New label");
 				lblNewLabel_7.setBounds(541, 46, 71, 17);
-				panel.add(lblNewLabel_7);
+				contentPane.add(lblNewLabel_7);
 	}
 	
 	public SQLQueryClient getQEngine() { return this.sql; }

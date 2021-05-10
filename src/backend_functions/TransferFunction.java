@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import ui.MenuUI;
 import ui.TransferUI;
 
 public class TransferFunction implements ActionListener
@@ -23,6 +24,13 @@ public class TransferFunction implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		String cardNo = usr.getCardNo();
+		String reID = trans.getRecipientID();
+		String amount = trans.getTransferAmount();
+		String text = trans.getComments();
+		String location = "8_10";
+		String transType = "TS";
+		
 		if (sql.testConnection())
 		{
 			if (sql.checkCardBalance(usr.getCardNo(), trans.getTransferAmount()))
@@ -33,8 +41,24 @@ public class TransferFunction implements ActionListener
 				
 				if (dialogResult == 0) 
 				{
-					sql.transferAmount(usr.getCardNo(), trans.getRecipientID(), trans.getTransferAmount());
-					JOptionPane.showMessageDialog(null,"Transfer successfully executed", "Notice", JOptionPane.INFORMATION_MESSAGE);
+					if (sql.transferAmount(cardNo, reID, amount))
+					{
+						sql.logTransaction(transType, cardNo, reID, location, amount, text);
+						JOptionPane.showMessageDialog
+							(null,"Transfer successfully executed", "Notice", 
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+					int choices = JOptionPane.YES_NO_OPTION;
+					int promptchoice = JOptionPane.showConfirmDialog
+						(null, "Make another transaction?", "Notice", choices);
+					
+					if (promptchoice == JOptionPane.NO_OPTION)
+					{
+						MenuUI ui = new MenuUI(sql, usr);
+							ui.setVisible(true);
+						trans.dispose();
+					}
 				}
 			}
 			

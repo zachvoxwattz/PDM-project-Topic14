@@ -37,6 +37,7 @@ public class TransferUI extends JFrame
 	{
 		this.sql = sqle; this.us = S;
 		dm = new DisplayMenu(us, this);
+		setTitle("Transfer Money UI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 600, 535);
 		setLocationRelativeTo(null);
