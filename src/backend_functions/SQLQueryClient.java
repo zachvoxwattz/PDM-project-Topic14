@@ -181,7 +181,7 @@ public class SQLQueryClient
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int col_no = rsmd.getColumnCount();
 			
-			for (int i = 1; i <= col_no; i++) c.add(rsmd.getColumnName(i));
+			for (int i = 1; i <= col_no; i++) c.add(rsmd.getColumnLabel(i));
 			
 			while (rs.next()) 
 				for (int i = 1; i <= col_no; i++) 
@@ -296,7 +296,7 @@ class SQLConst
 	
 	protected static String getTransactionsQuery(String cardNo)
 	{
-		String res = "select ID, typeID as TransactionType, accountID as AccountNumber, cardNo as CardNumber, recipientID as ReceiverNumber, locationName as Location, date as Date, amount as Amount, comment as Notes from transactions t, locations l where t.locationID = l.locationID and t.accountID in (select accountID from accounts a, cards c where a.cardsetUUID = c.cardsetUUID and c.cardNo = '" + cardNo + "')";
+		String res = "select ID, typeName as TransactionType, accountID as AccountNumber, cardNo as CardNumber, recipientID as ReceiverNumber, locationName as Location, date as Date, amount as Amount, comment as Notes from transactions t, locations l, transtypes tt where t.locationID = l.locationID and tt.typeID = t.typeID and t.accountID in (select accountID from accounts a, cards c where a.cardsetUUID = c.cardsetUUID and c.cardNo = '" + cardNo + "')";
 		
 		return res;
 	}
