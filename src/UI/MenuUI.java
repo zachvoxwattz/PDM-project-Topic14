@@ -31,7 +31,7 @@ public class MenuUI extends JFrame
 	
 	JButton vinfo = new JButton("View Information");
 	JButton transfer = new JButton("Transfer Money");	
-	JButton settle = new JButton("Bill Payment");
+	JButton settle = new JButton("Cash Withdrawal");
 	JButton history = new JButton("Transaction History");	
 	JButton exit = new JButton("Log out");
 	
@@ -111,7 +111,7 @@ public class MenuUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				SettleBillUI pay =new SettleBillUI(sql, usr);
+				WithdrawalUI pay =new WithdrawalUI(sql, usr);
 				pay.setVisible(true);
 				dispose();
 			}

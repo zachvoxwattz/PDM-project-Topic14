@@ -17,6 +17,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 
 public class LoginWindow extends JFrame 
@@ -28,7 +29,8 @@ public class LoginWindow extends JFrame
 	private JTextField cardNo;
 	private JPasswordField pinCode;
 	private JButton login;
-	
+	private JComboBox<String> jcb;
+	public static final String[] LOCATIONS = {"tq_3", "tp_3", "pm_3", "lt_td", "dk_1", "bn_1", "8_10", "6_3", "5_10", "2_3", "2_10","1_3"};
 	private Image logInButtonIMG, splashIMG;
 	
 	private SQLQueryClient sql;
@@ -52,7 +54,11 @@ public class LoginWindow extends JFrame
 		imageSplash = new JLabel(new ImageIcon(splashIMG));
 			imageSplash.setBounds(0, 0, 350, 350);
 			contentPane.add(imageSplash);
-
+		
+		jcb = new JComboBox<String>(LOCATIONS);
+			jcb.setBounds(350, 20, 60, 35);
+			contentPane.add(jcb);
+			
 		pCard = new JLabel("Enter credit card number");
 			pCard.setFont(new Font("Tahoma", Font.BOLD, 20));
 			pCard.setBounds(435, 58, 255, 30);
@@ -97,6 +103,7 @@ public class LoginWindow extends JFrame
 		dispose();
 	}
 	
+	public String getUserLocation() { return (String) this.jcb.getSelectedItem(); }
 	public SQLQueryClient getQueryEngine() { return this.sql; }
 	public String getCardNumber() { return this.cardNo.getText(); }
 	public String getCardPIN() { return String.valueOf(this.pinCode.getPassword()); }

@@ -28,20 +28,14 @@ public class InfoUI extends JFrame
 	
 	Image img1 =new ImageIcon(this.getClass().getResource("/changePin.png")).getImage();
 	Image img2 =new ImageIcon(this.getClass().getResource("/back.png")).getImage();
-	
-	/**
-	 * Launch the application.
-	 */
 
-	/**
-	 * Create the frame.
-	 */
 	public InfoUI(SQLQueryClient sqle, User s)
 	{
 		this.sql = sqle; this.us = s;
 		dm = new DisplayMenu(us, this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 994, 619);
+		setBounds(0, 0, 600, 400);
+		setTitle("PDM Project Topic 14");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,52 +46,48 @@ public class InfoUI extends JFrame
 		UserInfor.setFont(new Font("Tahoma", Font.BOLD, 18));
 		UserInfor.setBackground(new Color(211, 211, 211));
 		UserInfor.setForeground(new Color(0, 0, 139));
-		UserInfor.setBounds(0, 0, 980, 86);
+		UserInfor.setBounds(0, 0, 600, 80);
 		contentPane.add(UserInfor);
 		UserInfor.setOpaque(true);
 		
-		UserName = new JLabel("New label");
-		UserName.setBounds(542, 92, 87, 21);
-		contentPane.add(UserName);
 		
-		JLabel lblNewLabel = new JLabel("Account Name");
-		lblNewLabel.setBounds(215, 87, 126, 30);
-		contentPane.add(lblNewLabel);
 		
+		JLabel accountName = new JLabel("Account Name");
+		accountName.setBounds(100, 90, 126, 30);
+		contentPane.add(accountName);
+		
+		UserName = new JLabel(us.getName());
+			UserName.setBounds(300, 95, 150, 21);
+			contentPane.add(UserName);
 				
-				JLabel BirthDay = new JLabel("New label");
-				BirthDay.setBounds(542, 151, 87, 21);
-				contentPane.add(BirthDay);
+		JLabel accNum = new JLabel("Account Number");
+			accNum.setBounds(100, 144, 126, 30);
+			contentPane.add(accNum);
 				
-				JLabel Sex = new JLabel("New label");
-				Sex.setBounds(542, 201, 102, 30);
-				contentPane.add(Sex);
+		JLabel accName = new JLabel(sql.getAccountNo(us.getCardNo()));
+			accName.setBounds(300, 150, 150, 17);
+			contentPane.add(accName);
+			
+		JLabel card = new JLabel("Card Number");
+			card.setBounds(100, 200, 126, 30);
+			contentPane.add(card);
 				
-				JLabel Address = new JLabel("New label");
-				Address.setBounds(542, 252, 87, 24);
-				contentPane.add(Address);
+		JLabel cardid = new JLabel(us.getCardNo());
+			cardid.setBounds(300, 205, 150, 17);
+			contentPane.add(cardid);
+			
+		JLabel status = new JLabel("Card Status");
+			status.setBounds(100, 250, 126, 30);
+			contentPane.add(status);
 				
-				JLabel PhoneNumber = new JLabel("New label");
-				PhoneNumber.setBounds(542, 304, 87, 18);
-				contentPane.add(PhoneNumber);
+		JLabel stat = new JLabel(sql.getCardStatus(us.getCardNo()));
+			stat.setBounds(300, 255, 150, 17);
+			contentPane.add(stat);
 				
-				JLabel Email = new JLabel("New label");
-				Email.setBounds(541, 352, 88, 30);
-				contentPane.add(Email);
-				
-				JButton Back = new JButton("Back", new ImageIcon(img2));
-				Back.addActionListener(dm);
-				Back.setBounds(783, 421, 102, 42);
-				contentPane.add(Back);
-				
-				JLabel accNum = new JLabel("Account Number");
-				accNum.setHorizontalAlignment(SwingConstants.LEFT);
-				accNum.setBounds(215, 44, 102, 21);
-				contentPane.add(accNum);
-				
-				JLabel lblNewLabel_7 = new JLabel("New label");
-				lblNewLabel_7.setBounds(541, 46, 71, 17);
-				contentPane.add(lblNewLabel_7);
+		JButton Back = new JButton("Back", new ImageIcon(img2));
+			Back.addActionListener(dm);
+			Back.setBounds(400, 300, 102, 42);
+			contentPane.add(Back);
 	}
 	
 	public SQLQueryClient getQEngine() { return this.sql; }

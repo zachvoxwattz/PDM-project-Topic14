@@ -6,52 +6,49 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import ui.MenuUI;
-import ui.TransferUI;
+import ui.WithdrawalUI;
 
-public class TransferFunction implements ActionListener
+public class WithdrawFunction implements ActionListener 
 {
 	private SQLQueryClient sql;
-	private User usr;
-	private TransferUI trans;
+	private User user;
+	private WithdrawalUI wu;
 	
-	public TransferFunction(SQLQueryClient s, User us, TransferUI base)
+	public WithdrawFunction(SQLQueryClient sql, User us, WithdrawalUI w)
 	{
-		this.sql = s;
-		this.usr = us;
-		this.trans = base;
+		this.sql = sql;
+		this.user = us;
+		this.wu = w;
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent e) 
 	{
-		String reID = trans.getRecipientID();
-		String amount = trans.getTransferAmount();
-		String text = trans.getComments();
-		String location = usr.getLocation();
-		String transType = "TS";
+		String amount = wu.getAmount();
+		String type = "WD";
 		
 		if (sql.testConnection())
 		{
-			if (!sql.checkLock(usr.getCardNo()))
+			if (!sql.checkLock(user.getCardNo()))
 			{	
-				if (sql.checkCardBalance(usr.getCardNo(), trans.getTransferAmount()))
+				if (sql.checkCardBalance(user.getCardNo(), amount))
 				{
 					int dialogButton = JOptionPane.YES_NO_OPTION;
 					int dialogResult = JOptionPane.showConfirmDialog
-						(null, "Confirm transfering to this account?\nSelect NO to review your information", "Notice", dialogButton);
+						(null, "Confirm withdrawing from this account?", "Notice", dialogButton);
 					
 					if (dialogResult == 0) 
 					{
-						if (sql.checkUsage(usr.getCardNo(), amount) || sql.checkLocation(usr.getLocation()))
+						if (sql.checkUsage(user.getCardNo(), amount) || sql.checkLocation(user.getLocation()))
 						{
 							int attempt = 0;
 							String accountID = JOptionPane.showInputDialog
 									(null,"Verification Required! Please enter your AccountID below", "Notice", 
 											JOptionPane.INFORMATION_MESSAGE);
 							
-							if (accountID.equals(sql.getAccountNo(usr.getCardNo())))
+							if (accountID.equals(sql.getAccountNo(user.getCardNo())))
 							{
-								makeTransaction(transType, reID, location, amount, text);
+								makeTransaction(amount, type);
 							}
 							
 							else attempt++;
@@ -60,10 +57,10 @@ public class TransferFunction implements ActionListener
 							{
 								JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
 										JOptionPane.WARNING_MESSAGE);
-								sql.lockCard(usr.getCardNo());
+								sql.lockCard(user.getCardNo());
 							}
 						}
-						else makeTransaction(transType, reID, location, amount, text);
+						else makeTransaction(amount, type);
 					}
 				}
 				
@@ -73,18 +70,20 @@ public class TransferFunction implements ActionListener
 			
 			else JOptionPane.showMessageDialog(null,"THIS CREDIT CARD HAS BEEN LOCKED\nContact bank support for more information", "Error", 
 					JOptionPane.WARNING_MESSAGE);
+			// TODO Auto-generated method stub
 		}
 	}
 	
-	void makeTransaction(String transType, String reID, String loca, String amount, String text)
-	{	
-		if (sql.transferAmount(usr.getCardNo(), reID, amount))
+	public void makeTransaction(String amount, String type)
+	{
+		if (sql.withdrawAmount(user.getCardNo(), amount))
 		{
-			sql.logTransaction(transType, usr.getCardNo(), reID, loca, amount, text);
+			sql.logTransaction(type, user.getCardNo(), user.getLocation(), amount, "Withdrawal from account");
 			JOptionPane.showMessageDialog
-				(null,"Transfer successfully executed", "Notice", 
+				(null,"Withdrawal Completed\nThank you for using our service!", "Notice", 
 					JOptionPane.INFORMATION_MESSAGE);
 		}
+		
 		else JOptionPane.showMessageDialog(null,"An unexpected error encountered\nNo changes were made", "Error", 
 				JOptionPane.WARNING_MESSAGE);
 		
@@ -94,9 +93,9 @@ public class TransferFunction implements ActionListener
 		
 		if (promptchoice == JOptionPane.NO_OPTION)
 		{
-			MenuUI ui = new MenuUI(sql, usr);
+			MenuUI ui = new MenuUI(sql, user);
 				ui.setVisible(true);
-			trans.dispose();
+			wu.dispose();
 		}
 	}
 }

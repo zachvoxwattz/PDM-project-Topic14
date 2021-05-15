@@ -33,7 +33,7 @@ public class LoginCredentialsChecker implements ActionListener
 				{
 					if (sql.loginCheckCardPIN(pin)) 
 					{
-						User us = new User(cardNo, pin);
+						User us = new User(cardNo, pin, logWin.getUserLocation());
 						us.setName(sql.getCardOwnerName(cardNo));
 						logWin.showUI(us);
 					}

@@ -6,21 +6,21 @@ import java.awt.event.ActionListener;
 import ui.HistoryUI;
 import ui.InfoUI;
 import ui.MenuUI;
-import ui.SettleBillUI;
+import ui.WithdrawalUI;
 import ui.TransferUI;
 
 public class DisplayMenu implements ActionListener
 {
 	private User us;
 	private MenuUI ui1;
-	private SettleBillUI ui2;
+	private WithdrawalUI ui2;
 	private TransferUI ui3;
 	private InfoUI ui4;
 	private HistoryUI ui5;
 	private int index;
 
 	public DisplayMenu(User s, MenuUI fr) { this.us = s; this.ui1 = fr; index = 1; }
-	public DisplayMenu(User s, SettleBillUI fr) { this.us = s; this.ui2 = fr; index = 2; }
+	public DisplayMenu(User s, WithdrawalUI fr) { this.us = s; this.ui2 = fr; index = 2; }
 	public DisplayMenu(User s, TransferUI fr) { this.us = s; this.ui3 = fr; index = 3; }
 	public DisplayMenu(User s, InfoUI fr) { this.us = s; this.ui4 = fr; index = 4; }
 	public DisplayMenu(User s, HistoryUI fr) { this.us = s; this.ui5 = fr; index = 5; }
