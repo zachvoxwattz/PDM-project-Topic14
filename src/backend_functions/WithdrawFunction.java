@@ -39,25 +39,36 @@ public class WithdrawFunction implements ActionListener
 					
 					if (dialogResult == 0) 
 					{
-						if (sql.checkUsage(user.getCardNo(), amount) || sql.checkLocation(user.getLocation()))
+						if (sql.checkUsage(user.getCardNo(), amount) || sql.checkLocation(user.getCardNo(), user.getLocation()))
 						{
 							int attempt = 0;
-							String accountID = JOptionPane.showInputDialog
-									(null,"Verification Required! Please enter your AccountID below", "Notice", 
-											JOptionPane.INFORMATION_MESSAGE);
-							
-							if (accountID.equals(sql.getAccountNo(user.getCardNo())))
-							{
-								makeTransaction(amount, type);
-							}
-							
-							else attempt++;
-							
-							if (attempt == 5) 
-							{
-								JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
-										JOptionPane.WARNING_MESSAGE);
-								sql.lockCard(user.getCardNo());
+							while (true)
+							{	
+								String accountID = JOptionPane.showInputDialog
+										(null,"Verification Required! Please enter your AccountID below", "Notice", 
+												JOptionPane.INFORMATION_MESSAGE);
+								
+								if (accountID.equals(sql.getAccountNo(user.getCardNo()))) 
+								{
+									makeTransaction(amount, type);
+									break;
+								}
+								
+								else 
+								{
+									JOptionPane.showMessageDialog
+										(null,"Incorrect Account Number\nPlease try again\n" + attempt + " attempt(s)", "Error", 
+											JOptionPane.WARNING_MESSAGE);
+									attempt++;
+								}
+								
+								if (attempt == 3) 
+								{
+									JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+											JOptionPane.WARNING_MESSAGE);
+									sql.lockCard(user.getCardNo());
+									break;
+								}
 							}
 						}
 						else makeTransaction(amount, type);
@@ -70,7 +81,6 @@ public class WithdrawFunction implements ActionListener
 			
 			else JOptionPane.showMessageDialog(null,"THIS CREDIT CARD HAS BEEN LOCKED\nContact bank support for more information", "Error", 
 					JOptionPane.WARNING_MESSAGE);
-			// TODO Auto-generated method stub
 		}
 	}
 	

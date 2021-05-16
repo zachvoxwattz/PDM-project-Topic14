@@ -42,7 +42,7 @@ public class TransferFunction implements ActionListener
 					
 					if (dialogResult == 0) 
 					{
-						if (sql.checkUsage(usr.getCardNo(), amount) || sql.checkLocation(usr.getLocation()))
+						if (sql.checkUsage(usr.getCardNo(), amount) || sql.checkLocation(usr.getCardNo(), usr.getLocation()))
 						{
 							int attempt = 0;
 							String accountID = JOptionPane.showInputDialog
@@ -56,7 +56,7 @@ public class TransferFunction implements ActionListener
 							
 							else attempt++;
 							
-							if (attempt == 5) 
+							if (attempt == 3) 
 							{
 								JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
 										JOptionPane.WARNING_MESSAGE);

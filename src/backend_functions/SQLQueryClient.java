@@ -226,20 +226,22 @@ public class SQLQueryClient
 		return suspicious;
 	}
 	
-	public boolean checkLocation(String loca)
+	public boolean checkLocation(String cardNo, String loca)
 	{
 		boolean suspicious = false;
 		iniConnect();
 		String prev_loca = "";
-		String query = SQLConst.getUsedLocationQuery(loca);
+		String query = SQLConst.getUsedLocationQuery(cardNo);
 		try 
 		{ 
 			ResultSet rs = state.executeQuery(query);
 			if (rs.next()) prev_loca = rs.getString(1);
 			
 			if (!prev_loca.equals(loca)) suspicious = true;
+			else suspicious = false;
 		} 
 		catch (Exception e) { e.printStackTrace(); }
+		System.out.println(loca);
 		return suspicious;
 	}
 	

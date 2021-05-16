@@ -13,6 +13,7 @@ public class LoginCredentialsChecker implements ActionListener
 	private LoginWindow logWin;
 	private SQLQueryClient sql;
 	private String cardNo, pin;
+	private int attempt = 0;
 	
 	public LoginCredentialsChecker(LoginWindow lw) 
 	{ 
@@ -26,21 +27,31 @@ public class LoginCredentialsChecker implements ActionListener
 		cardNo = logWin.getCardNumber(); pin = logWin.getCardPIN();
 		if (sql.testConnection())
 		{
-			
 			if (checkInputs())
 			{
-				if (sql.loginCheckCardNumber(cardNo)) 
+				if (!sql.checkLock(cardNo))
 				{
-					if (sql.loginCheckCardPIN(pin)) 
+					if (sql.loginCheckCardNumber(cardNo)) 
 					{
-						User us = new User(cardNo, pin, logWin.getUserLocation());
-						us.setName(sql.getCardOwnerName(cardNo));
-						logWin.showUI(us);
+						if (sql.loginCheckCardPIN(pin)) 
+						{
+							User us = new User(cardNo, pin, logWin.getUserLocation());
+							us.setName(sql.getCardOwnerName(cardNo));
+							logWin.showUI(us);
+							attempt = 0;
+						}
+						else 
+						{
+							attempt++;
+							JOptionPane.showMessageDialog(null,"Incorrect PIN code", "Error", 
+								JOptionPane.WARNING_MESSAGE);
+						}
+						if (attempt == 3) sql.lockCard(cardNo);
 					}
-					else JOptionPane.showMessageDialog(null,"Incorrect PIN code", "Error", 
+					else JOptionPane.showMessageDialog(null,"Card number does not exist", "Error", 
 							JOptionPane.WARNING_MESSAGE);
 				}
-				else JOptionPane.showMessageDialog(null,"Card number does not exist", "Error", 
+				else JOptionPane.showMessageDialog(null,"This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
 						JOptionPane.WARNING_MESSAGE);
 			}
 		}

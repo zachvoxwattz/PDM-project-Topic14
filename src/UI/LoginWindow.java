@@ -89,9 +89,6 @@ public class LoginWindow extends JFrame
 			checker = new LoginCredentialsChecker(this);
 			login.addActionListener(checker);
 			contentPane.add(login);
-		
-		cardNo.setText("4040505060607070");
-		pinCode.setText("017650");
 			
 		add(contentPane);
 	}

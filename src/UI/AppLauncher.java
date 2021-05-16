@@ -1,7 +1,6 @@
 package ui;
 
 import java.awt.EventQueue;
-
 import backend_functions.SQLQueryClient;
 
 public class AppLauncher
@@ -20,3 +19,4 @@ public class AppLauncher
 		});
 	}
 }
+

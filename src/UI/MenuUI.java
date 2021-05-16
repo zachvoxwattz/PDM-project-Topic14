@@ -65,9 +65,24 @@ public class MenuUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				InfoUI view =new InfoUI(sql, usr);
-				view.setVisible(true);
-				dispose();	
+				if (!sql.checkLock(usr.getCardNo()))
+				{	
+					String accountID = JOptionPane.showInputDialog
+							(null,"Verification Required! Please enter your AccountID below", "Notice", 
+									JOptionPane.INFORMATION_MESSAGE);
+					
+					if (accountID.equals(sql.getAccountNo(usr.getCardNo())))
+					{
+						InfoUI view =new InfoUI(sql, usr);
+						view.setVisible(true);
+						dispose();
+					}
+					
+					else JOptionPane.showMessageDialog(null,"Access is denied", "WARNING", 
+							JOptionPane.WARNING_MESSAGE);
+				}
+				else JOptionPane.showMessageDialog(null,"This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+						JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		vinfo.setFont(f);
@@ -81,9 +96,14 @@ public class MenuUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				HistoryUI view =new HistoryUI(sql, usr);
-				view.setVisible(true);
-				dispose();
+				if (!sql.checkLock(usr.getCardNo()))
+				{	
+					HistoryUI view = new HistoryUI(sql, usr);
+					view.setVisible(true);
+					dispose();
+				}
+				else JOptionPane.showMessageDialog(null,"This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+						JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		history.setFont(f);
@@ -96,9 +116,14 @@ public class MenuUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				TransferUI trans = new TransferUI(sql, usr);
-				trans.setVisible(true);
-				dispose();
+				if (!sql.checkLock(usr.getCardNo()))
+				{
+					TransferUI view = new TransferUI(sql, usr);
+					view.setVisible(true);
+					dispose();
+				}
+				else JOptionPane.showMessageDialog(null,"This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+						JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		transfer.setBounds(322, 200, 220, 45);
@@ -111,9 +136,14 @@ public class MenuUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				WithdrawalUI pay =new WithdrawalUI(sql, usr);
-				pay.setVisible(true);
-				dispose();
+				if (!sql.checkLock(usr.getCardNo()))
+				{
+					WithdrawalUI pay =new WithdrawalUI(sql, usr);
+					pay.setVisible(true);
+					dispose();
+				}
+				else JOptionPane.showMessageDialog(null,"This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+						JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		settle.setFont(f);
