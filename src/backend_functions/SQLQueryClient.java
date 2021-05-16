@@ -226,6 +226,22 @@ public class SQLQueryClient
 		return suspicious;
 	}
 	
+	public boolean checkAccIDExist(String accID)
+	{
+		boolean yes = false;
+		iniConnect();
+		String query = SQLConst.getCheckAccIDQuery(accID);
+		
+		try
+		{
+			ResultSet rs = state.executeQuery(query);
+			if (rs.next()) yes = true;
+		}
+		catch (Exception e) { e.printStackTrace(); }
+		
+		return yes;
+	}
+	
 	public boolean checkLocation(String cardNo, String loca)
 	{
 		boolean suspicious = false;
@@ -241,7 +257,6 @@ public class SQLQueryClient
 			else suspicious = false;
 		} 
 		catch (Exception e) { e.printStackTrace(); }
-		System.out.println(loca);
 		return suspicious;
 	}
 	
@@ -464,6 +479,12 @@ class SQLConst
 	protected static String getUsedLocationQuery(String s)
 	{
 		String res = "select locationID from transactions where cardNo = '"+s+"' and date in (select max(date) from transactions)";
+		return res;
+	}
+	
+	protected static String getCheckAccIDQuery(String accid)
+	{
+		String res = "select accountID from accounts where accountID = '" + accid + "'";
 		return res;
 	}
 }

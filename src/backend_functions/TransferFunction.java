@@ -13,6 +13,7 @@ public class TransferFunction implements ActionListener
 	private SQLQueryClient sql;
 	private User usr;
 	private TransferUI trans;
+	private int attempt = 0;
 	
 	public TransferFunction(SQLQueryClient s, User us, TransferUI base)
 	{
@@ -44,24 +45,45 @@ public class TransferFunction implements ActionListener
 					{
 						if (sql.checkUsage(usr.getCardNo(), amount) || sql.checkLocation(usr.getCardNo(), usr.getLocation()))
 						{
-							int attempt = 0;
-							String accountID = JOptionPane.showInputDialog
-									(null,"Verification Required! Please enter your AccountID below", "Notice", 
-											JOptionPane.INFORMATION_MESSAGE);
+							attempt = 0;
 							
-							if (accountID.equals(sql.getAccountNo(usr.getCardNo())))
+							while(true)
 							{
-								makeTransaction(transType, reID, location, amount, text);
+								if (sql.checkAccIDExist(reID))
+								{
+									String accountID = JOptionPane.showInputDialog
+											(null,"Verification Required! Please enter your AccountID below", "Notice", 
+													JOptionPane.INFORMATION_MESSAGE);
+									
+									if (accountID.equals(sql.getAccountNo(usr.getCardNo())))
+									{
+										makeTransaction(transType, reID, location, amount, text);
+										break;
+									}
+									
+									else
+									{
+										attempt++;
+										JOptionPane.showMessageDialog
+										(null,"Incorrect Account Number\nPlease try again\n" + attempt + " attempt(s)", "Error", 
+											JOptionPane.WARNING_MESSAGE);
+									}
+									if (attempt == 3) 
+									{
+										JOptionPane.showMessageDialog(null,"FAILED AFTER 3 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+												JOptionPane.WARNING_MESSAGE);
+										sql.lockCard(usr.getCardNo());
+										break;
+									}
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(null,"Account Number does not exist", "Error",
+												JOptionPane.WARNING_MESSAGE);
+									break;
+								}
 							}
 							
-							else attempt++;
-							
-							if (attempt == 3) 
-							{
-								JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
-										JOptionPane.WARNING_MESSAGE);
-								sql.lockCard(usr.getCardNo());
-							}
 						}
 						else makeTransaction(transType, reID, location, amount, text);
 					}

@@ -64,7 +64,7 @@ public class WithdrawFunction implements ActionListener
 								
 								if (attempt == 3) 
 								{
-									JOptionPane.showMessageDialog(null,"FAILED AFTER 5 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
+									JOptionPane.showMessageDialog(null,"FAILED AFTER 3 Attempts. This Credit Card has been LOCKED\nContact Bank Support for more information", "WARNING", 
 											JOptionPane.WARNING_MESSAGE);
 									sql.lockCard(user.getCardNo());
 									break;
