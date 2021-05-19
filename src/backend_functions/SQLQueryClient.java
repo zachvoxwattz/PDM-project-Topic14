@@ -373,7 +373,8 @@ public class SQLQueryClient
 	
 	private void closeComms()
 	{
-		try { conn.close(); state.close(); } catch (Exception e) { e.printStackTrace(); }
+		try { conn.close(); state.close(); } 
+		catch (Exception e) { e.printStackTrace(); }
 	}
 }
 
