@@ -218,9 +218,14 @@ public class SQLQueryClient
 		try 
 		{ 
 			ResultSet rs = state.executeQuery(query);
-			if (rs.next()) recent_val = Long.parseLong(rs.getString(1));
+			if (rs.next()) 
+			{
+				Double temp = Double.parseDouble(rs.getString(1));
+				recent_val = Math.round(temp);
+				System.out.println(recent_val);				
+			}
 			else recent_val = 0;
-			if (wish_val - recent_val >= 5000000) suspicious = true;
+			if (wish_val - recent_val >= 3500000) suspicious = true;
 		} 
 		catch (Exception e) { e.printStackTrace(); }
 		return suspicious;
@@ -460,7 +465,7 @@ class SQLConst
 	
 	protected static String getCheckSpendQuery(String s)
 	{
-		String res = "select amount from transactions where cardNo = '" + s + "' and date in (select max(date) from transactions)";
+		String res = "select avg(amount) from transactions where cardNo = '"+ s +"' order by date desc limit 0, 5";
 		return res;
 	}
 	
